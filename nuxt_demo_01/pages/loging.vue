@@ -2,9 +2,9 @@
   <div class="container">
     <form class="loging-form">
       <label for="user">User Name: </label><br>
-      <input type="text" name="username" v-modle="userName" id="user"><br>
+      <input type="text" name="username" v-model="userName" id="user"><br>
       <label for="pwd">Password: </label><br>
-      <input type="password" name="pwd" v-modle="pwd" id="pwd">
+      <input type="password" name="pwd" v-model="pwd" id="pwd">
       <button type="submit" name="loging" @click.prevent="loging">Loging</button>
     </form>
   </div>
@@ -19,7 +19,7 @@ import axios from 'axios'
     Logo
   }
 })
-export default class Loging extends Vue {
+export default class Index extends Vue {
   userName: string = ''
   pwd: string = ''
   async loging(): Promise<void> {
@@ -31,8 +31,8 @@ export default class Loging extends Vue {
       }
     })
     this.$nuxt.$loading.finish()
-    if (meta.status !== 200) return alert(meta.msg)
-    this.$router.push('/index')
+    if (meta?.status !== 200) return alert(meta.msg)
+    this.$router.push('/personal')
   }
 }
 </script>

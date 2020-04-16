@@ -43,6 +43,23 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
+  // router
+  router: {
+    extendRoutes() {
+      // console.log(args)
+      // for (const route of routes) {
+      //   if (route.name === 'personal') {         
+      //     route.beforeEnter = function (to, form , next) {
+      //       console.log(process.server)
+      //       next()
+      //     }
+      //     // console.log(route)
+      //     break
+      //   }
+      // }
+      
+    }
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options

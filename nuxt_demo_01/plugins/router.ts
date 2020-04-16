@@ -7,8 +7,9 @@ export default (context: Context): void => {
   const app = context.app
   const router = app.router as VueRouter
   router.beforeEach((to: Route, from: Route, next: next) => {
-    if (to.path !== '/loging') return next('/loging')
-     console.log(window.sessionStorage.getItem('token'))
+    if (to.path === '/loging') return next()
+    console.log('in foreachGuard:', process.server)
     next()
   })
 }
+

@@ -1,12 +1,23 @@
 const Koa = require('koa')
+const parser = require('koa-bodyparser')
+const session = require('koa-generic-session')
+const redis = require('koa-redis')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+const logingInterface = require('./interface/loging.js')
 
 const app = new Koa()
-
+app.keys = ['key', 'keys']
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = app.env !== 'production'
+
+app.use(parser())
+app.use(session({
+  // key: 'pre',
+  // prefix: 'sse',
+  store: redis()
+}))
 
 async function start () {
   // Instantiate nuxt.js
@@ -23,6 +34,9 @@ async function start () {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
+  // interface
+  app.use(logingInterface.routes()).use(logingInterface.allowedMethods())
 
   app.use((ctx) => {
     ctx.status = 200

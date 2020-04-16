@@ -15,6 +15,11 @@
     "@nuxtjs/axios": "^5.3.6",
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
+    "koa-bodyparser": "^4.3.0",
+    "koa-generic-session": "^2.0.4",
+    "koa-redis": "^4.0.1",
+    "koa-router": "^8.0.8",
+    "koa-session": "^5.13.1",
     "nuxt": "^2.0.0",
     "nuxt-property-decorator": "^2.5.1"
   },

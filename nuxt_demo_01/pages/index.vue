@@ -1,71 +1,22 @@
 <template>
   <div class="container">
-    <form class="loging-form">
-      <label for="user">User Name: </label><br>
-      <input type="text" name="username" v-modle="userName" id="user"><br>
-      <label for="pwd">Password: </label><br>
-      <input type="password" name="pwd" v-modle="pwd" id="pwd">
-      <button type="submit" name="loging" @click.prevent="loging">Loging</button>
-    </form>
+    Home
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import Logo from '~/components/Logo.vue'
-import axios from 'axios'
 @Component({
   components: {
     Logo
   }
 })
 export default class Index extends Vue {
-  userName: string = ''
-  pwd: string = ''
-  async loging(): Promise<void> {
-    this.$nuxt.$loading.start()
-    const { data: { result, meta } } = await axios.post('/loging', {
-      data: {
-        userName: this.userName,
-        pwd: this.pwd
-      }
-    })
-    this.$nuxt.$loading.finish()
-    if (meta.status !== 200) return alert(meta.msg)
-    this.$router.push('/home')
-  }
+
 }
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
