@@ -2,14 +2,14 @@
   <div class="position">
     <span class="el-icon-location"></span>
     <span class="current-city">{{ current }}</span>
-    <a class="change-city">切换城市</a>
+    <nuxt-link class="change-city" to="/change" tag="a">切换城市</nuxt-link>
     [
-    <a
+    <nuxt-link
       v-for="guess of nearby"
       :key="guess.id"
-      :href="guess.link"
+      :to="guess.link"
       class="guess-city"
-      >{{ guess.city }}</a>
+      >{{ guess.city }}</nuxt-link>
     ]
   </div>
 </template>
@@ -33,10 +33,12 @@ export default class Position extends Vue {
 <style scoped>
 .position {
   color: #999;
-  font-size: 12px
+  font-size: 12px;
 }
-
-.change-city:hover, .neary-city:hover , .guess-city:hover{
+.change-city, .guess-city {
+  text-decoration: none;
+}
+.change-city:hover, .guess-city:hover{
   color: #FE8C00;
   cursor: pointer;
 }
@@ -52,7 +54,6 @@ export default class Position extends Vue {
 
 .guess-city {
   color: #999;
-  text-decoration: none;
   margin: 0 4px;
 }
 </style>
