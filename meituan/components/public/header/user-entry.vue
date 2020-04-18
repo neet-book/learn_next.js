@@ -3,7 +3,7 @@
     <!-- 已登录 -->
     <template v-if="isLoging">
       <nuxt-link to="/user" class="logup-loging">{{ user }}</nuxt-link>
-      <nuxt-link to="signout" class="signout-logon">退出</nuxt-link>
+      <nuxt-link to="/signout" class="signout-logon">退出</nuxt-link>
     </template>
     <!-- 未登录 -->
     <template v-else>

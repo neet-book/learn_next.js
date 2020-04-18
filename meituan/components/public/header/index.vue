@@ -1,11 +1,14 @@
 <template>
   <header class="header">
+    <!-- 头部导航栏 -->
     <div class="header-bar">
       <div class="header-bar-container">
         <position current="深圳" :nearby="nearbyCity" />
         <user-entry user="suer" :isLoging="false" />
+        <nav-menu />
       </div>
     </div>
+    <!-- 头部内容 -->
     <div class="header-content">
     </div>
   </header>
@@ -17,10 +20,12 @@ import { Vue, Component } from 'nuxt-property-decorator'
 
 import Position from './position.vue'
 import UserEntry from './user-entry.vue'
+import NavMenu from '~/components/common/nav-menu.vue'
 @Component({
   components: {
     Position,
-    UserEntry
+    UserEntry,
+    NavMenu
   }
 })
 export default class CommonHeader extends Vue {
@@ -42,7 +47,7 @@ export default class CommonHeader extends Vue {
 
 <style scoped>
 .header-bar {
-  height: 40xp;
+  height: 40px;
   line-height: 40px;
 }
 .header-bar-container {
