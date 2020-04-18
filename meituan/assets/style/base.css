@@ -1,0 +1,27 @@
+@import "./normalize.css";
+:root {
+  --color-normal: #646464;
+  --color-hover: #FE8C00;
+  --color-tint: #999;
+  --color-title: #222;
+  --color-price: #FF6600;
+  --baseFontSize: 12px;
+}
+
+body {
+  background-color: #F8F8F8;
+}
+
+/* 清楚浮动 */
+.clear-fix::after {
+  clear: both;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+/* IE 浏览器修复浮动 */
+.clear-fix {
+  zoom: 1;
+}

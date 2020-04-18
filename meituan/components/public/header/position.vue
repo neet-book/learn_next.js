@@ -34,6 +34,7 @@ export default class Position extends Vue {
 .position {
   color: #999;
   font-size: 12px;
+  display: inline-block;
 }
 .change-city, .guess-city {
   text-decoration: none;

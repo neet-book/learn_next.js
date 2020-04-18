@@ -1,8 +1,6 @@
 <template>
   <div>
-    <header>
-      <position current="深圳" :nearby="nearbyCity" />
-    </header>
+    <common-header/>
     <main>
       <nuxt/>
     </main>
@@ -14,26 +12,15 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 
-import Position from '~/components/public/header/position.vue'
+import CommonHeader from '~/components/public/header/index.vue'
 
 @Component({
   components: {
-    Position
+    CommonHeader
   }
 })
 export default class  extends Vue {
-  nearbyCity = [
-    {
-      id: 0,
-      link: '#',
-      city: '惠州'
-    },
-    {
-      id: 1,
-      link: '#',
-      city: '东莞'
-    },
-  ]
+  
 }
 </script>
 
