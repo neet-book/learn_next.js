@@ -1,55 +1,74 @@
 <template>
-  <div class="nav-menu">
-  <div class="nav-container">
-    <nuxt-link :to="list[0].link" class="item">{{ list[0].title }}</nuxt-link>
-    <nuxt-link v-for=" item of list.slice(1) " :key="item.title" to="item.link" class="item">{{ item.title }}</nuxt-link>
-  </div>
+  <div class="menu">
+    <div class="menu-container">
+      <div>
+        <ul class="menu-list">
+          <li v-for="item of list" :key="item.title">
+            <nuxt-link to="item.link" target="_blank" class="item">{{ item.title }}</nuxt-link>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
 interface MenuItem {
   title: string
   link: string
 }
 @Component
 export default class NavMenu extends Vue {
-  list: MenuItem[] = [
-    { title: '我的信息', link: '#' },
-    { title: '我的订单', link: '#' },
-    { title: '我的收藏', link: '#' },
-    { title: '抵用券', link: '#' },
-    { title: '账户设置', link: '#' },
-  ]
+  @Prop({
+    type: Array, default: () => []
+  })
+  list: MenuItem[] | undefined
 }
 </script>
 
-
 <style scoped>
-.nav-menu {
-  display: inline-block;
+.menu {
   width: 78px;
   height: 40px;
-  overflow: hidden;
-}
-.nav-menu:hover {
   display: inline-block;
+}
+
+.menu-container {
+  display: flex;
+  height: 40px;
+  overflow: hidden;
+  transition: ease-out 0.4s;
+}
+
+.menu-container:hover {
   overflow: visible;
 }
-.nav-container {
-  display: inline-block;
-  display: flex;
-  flex-wrap: wrap;
+
+.menu-list:hover {
+  overflow: visible;
+    background-color: #fff;
+  border-color: #E5E5E5;
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.1);
 }
+
+.menu-list li {
+  list-style: none;
+}
+
 .item {
-  display: inline-block;
+  display: block;
   width: 78px;
   height: 40px;
   font-size: 12px;
-  line-height: 40px;
   text-align: center;
-  color: var(--color-tint);
+  line-height: 40px;
   text-decoration: none;
+  color: var(--color-tint);
+  list-style: none;
+}
+
+.item:hover {
+  color: var(--color-hover);
 }
 </style>

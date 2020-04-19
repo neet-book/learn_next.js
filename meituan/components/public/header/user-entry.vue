@@ -2,13 +2,13 @@
   <div class="user-entry">
     <!-- 已登录 -->
     <template v-if="isLoging">
-      <nuxt-link to="/user" class="logup-loging">{{ user }}</nuxt-link>
-      <nuxt-link to="/signout" class="signout-logon">退出</nuxt-link>
+      <nuxt-link to="/user" class="logup-loging" target="_blank">{{ user }}</nuxt-link>
+      <nuxt-link to="/signout" class="signout-logon" target="_blank">退出</nuxt-link>
     </template>
     <!-- 未登录 -->
     <template v-else>
-      <nuxt-link to="/loging" class="logup-loging">立即登录</nuxt-link>
-      <nuxt-link to="/logon" class="signout-logon">注册</nuxt-link>
+      <nuxt-link to="/loging" class="logup-loging" target="_blank">立即登录</nuxt-link>
+      <nuxt-link to="/logon" class="signout-logon" target="_blank">注册</nuxt-link>
     </template>
   </div>
 </template>

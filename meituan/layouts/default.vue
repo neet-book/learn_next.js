@@ -1,8 +1,8 @@
 <template>
   <div>
-    <common-header/>
+    <common-header />
     <main>
-      <nuxt/>
+      <nuxt />
     </main>
     <footer>
     </footer>
@@ -19,14 +19,10 @@ import CommonHeader from '~/components/public/header/index.vue'
     CommonHeader
   }
 })
-export default class  extends Vue {
-  
+export default class DefaultLayout extends Vue {
+
 }
 </script>
 
-
 <style scoped>
-header {
-  height: 127px;
-}
 </style>

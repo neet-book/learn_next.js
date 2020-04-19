@@ -4,16 +4,18 @@
     <div class="header-bar">
       <div class="header-bar-container">
         <position current="深圳" :nearby="nearbyCity" />
-        <user-entry user="suer" :isLoging="false" />
-        <nav-menu />
+        <user-entry user="suer" :is-loging="false" />
+        <nav>
+          <ul>
+            <li></li>
+          </ul>
+        </nav>
       </div>
     </div>
     <!-- 头部内容 -->
-    <div class="header-content">
-    </div>
+    <div class="header-content"></div>
   </header>
 </template>
-
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
@@ -30,33 +32,41 @@ import NavMenu from '~/components/common/nav-menu.vue'
 })
 export default class CommonHeader extends Vue {
   nearbyCity = [
-      {
-        id: 0,
-        link: '#',
-        city: '惠州'
-      },
-      {
-        id: 1,
-        link: '#',
-        city: '东莞'
-      },
-    ]
+    {
+      id: 0,
+      link: '#',
+      city: '惠州'
+    },
+    {
+      id: 1,
+      link: '#',
+      city: '东莞'
+    }
+  ]
+
+  firstMenu = [
+    { title: '我的信息', link: '#' },
+    { title: '我的订单', link: '#' },
+    { title: '我的收藏', link: '#' },
+    { title: '抵用券', link: '#' },
+    { title: '账户设置', link: '#' }
+  ]
 }
 </script>
-
 
 <style scoped>
 .header-bar {
   height: 40px;
-  line-height: 40px;
 }
 .header-bar-container {
   max-width: 1190px;
   margin: 0 auto;
+  /* display: flex;
+  align-items: center; */
 }
 
 .header-content {
   background: white;
-  height: 157px
+  height: 157px;
 }
 </style>

@@ -2,14 +2,18 @@
   <div class="position">
     <span class="el-icon-location"></span>
     <span class="current-city">{{ current }}</span>
-    <nuxt-link class="change-city" to="/change" tag="a">切换城市</nuxt-link>
+    <nuxt-link class="change-city" to="/change" tag="a" target="_blank">
+      切换城市
+    </nuxt-link>
     [
     <nuxt-link
       v-for="guess of nearby"
       :key="guess.id"
       :to="guess.link"
       class="guess-city"
-      >{{ guess.city }}</nuxt-link>
+    >
+      {{ guess.city }}
+    </nuxt-link>
     ]
   </div>
 </template>
