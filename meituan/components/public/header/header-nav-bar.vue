@@ -1,0 +1,52 @@
+<template>
+  <nav>
+    <ul class="header-nav-first clear-fix">
+      <li>
+        <nav-menu :list="list"/>
+      </li>
+      <li>
+        <nav-menu :list="list2"/>
+      </li>
+      <li>
+        <nav-menu :list="list"/>
+      </li>
+    </ul>
+  </nav>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+import NavMenu from '~/components/common/nav-menu.vue'
+@Component({
+  components: {
+    NavMenu
+  }
+})
+export default class HeaderNavBar extends Vue {
+  list = [
+    { title: '我的美团', link: '#' },
+    { title: '我的订单', link: '#' },
+    { title: '我的收藏', link: '#' },
+    { title: '抵用卷', link: '#' },
+    { title: '账号设置', link: '#' },
+  ]
+
+  list2 = [
+    { title: '美团餐饮商户中心', link: '#' },
+    { title: '登录商家中心', link: '#' },
+    { title: '智能收银', link: '#' },
+    { title: '我想合作' ,link: '#' },
+    { title: '手机免费开店' ,link: '#' }
+  ]
+}
+</script>
+
+<style scpoed>
+  .header-nav-first > li{
+    list-style: none;
+    height: 40px;
+    font-size: 12px;
+    float: left;
+    box-sizing: border-box;
+  }
+</style>

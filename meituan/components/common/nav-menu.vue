@@ -29,13 +29,12 @@ export default class NavMenu extends Vue {
 
 <style scoped>
 .menu {
-  width: 78px;
   height: 40px;
   display: inline-block;
 }
 
 .menu-container {
-  display: flex;
+  /* display: flex; */
   height: 40px;
   overflow: hidden;
   transition: ease-out 0.4s;
@@ -54,18 +53,18 @@ export default class NavMenu extends Vue {
 
 .menu-list li {
   list-style: none;
+  text-align: center;
 }
 
 .item {
-  display: block;
-  width: 78px;
   height: 40px;
+  padding: 12px 14px;
   font-size: 12px;
-  text-align: center;
   line-height: 40px;
   text-decoration: none;
   color: var(--color-tint);
   list-style: none;
+  box-sizing: border-box;
 }
 
 .item:hover {

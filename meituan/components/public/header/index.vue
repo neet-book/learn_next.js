@@ -1,15 +1,17 @@
 <template>
   <header class="header">
-    <!-- 头部导航栏 -->
+    <!-- 头部bar -->
     <div class="header-bar">
       <div class="header-bar-container">
-        <position current="深圳" :nearby="nearbyCity" />
-        <user-entry user="suer" :is-loging="false" />
-        <nav>
-          <ul>
-            <li></li>
-          </ul>
-        </nav>
+        <!-- 位置与用户入口 -->
+        <div class="hader-bar-position">
+          <position current="深圳" :nearby="nearbyCity" />
+          <user-entry user="suer" :is-loging="false" />
+        </div>
+         <!-- 导航栏 -->
+        <div class="header-bar-nav">
+          <header-nav-bar />
+        </div>
       </div>
     </div>
     <!-- 头部内容 -->
@@ -22,12 +24,12 @@ import { Vue, Component } from 'nuxt-property-decorator'
 
 import Position from './position.vue'
 import UserEntry from './user-entry.vue'
-import NavMenu from '~/components/common/nav-menu.vue'
+import HeaderNavBar from './header-nav-bar.vue'
 @Component({
   components: {
     Position,
     UserEntry,
-    NavMenu
+    HeaderNavBar
   }
 })
 export default class CommonHeader extends Vue {
@@ -61,8 +63,23 @@ export default class CommonHeader extends Vue {
 .header-bar-container {
   max-width: 1190px;
   margin: 0 auto;
-  /* display: flex;
-  align-items: center; */
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.header-bar-position {
+  /* flex: 0 */
+  display: inline-block;
+  /* float: left; */
+}
+
+.header-bar-nav {
+  /* flex: 0 */
+  display: inline-block;
+  /* float: right; */
 }
 
 .header-content {
