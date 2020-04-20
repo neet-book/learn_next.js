@@ -2,13 +2,17 @@
   <nav>
     <ul class="header-nav-first clear-fix">
       <li>
-        <nav-menu :list="list"/>
+        <header-nav-menu :list="list"/>
       </li>
       <li>
-        <nav-menu :list="list2"/>
+        <header-nav-menu :list="list2"/>
       </li>
       <li>
-        <nav-menu :list="list"/>
+        <header-nav-menu :list="[{ title: '手机App', link: '#' }]"/>
+      </li>
+      <li>
+        <span>网站导航</span>
+        <header-nav-site />
       </li>
     </ul>
   </nav>
@@ -16,10 +20,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import NavMenu from '~/components/common/nav-menu.vue'
+import HeaderNavMenu from './header-nav-menu.vue'
+import HeaderNavSite from './header-nav-site.vue'
 @Component({
   components: {
-    NavMenu
+    HeaderNavMenu,
+    HeaderNavSite
   }
 })
 export default class HeaderNavBar extends Vue {

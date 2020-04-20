@@ -4,7 +4,7 @@
       <div>
         <ul class="menu-list">
           <li v-for="item of list" :key="item.title">
-            <nuxt-link to="item.link" target="_blank" class="item">{{ item.title }}</nuxt-link>
+            <nuxt-link :to="item.link" target="_blank" class="item">{{ item.title }}</nuxt-link>
           </li>
         </ul>
       </div>
@@ -19,7 +19,7 @@ interface MenuItem {
   link: string
 }
 @Component
-export default class NavMenu extends Vue {
+export default class HeaderNavMenu extends Vue {
   @Prop({
     type: Array, default: () => []
   })
