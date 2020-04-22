@@ -8,18 +8,21 @@ const { JSDOM } = require('jsdom');
 let exportData = null
 
 
-async function start() {
-  let webStr = await readFile('./meituan.html')
-  if (!webStr) return console.log('读取失败')
-  // 转化为DOM
-  const { document } = new JSDOM(webStr).window,
-  // 获取分类列表
-  categorys = getCategory(document),
-  cateDetail = getCatDetail(document)
+// async function start() {
+//   let webStr = await readFile('./static/meituan.html')
+//   if (!webStr) return console.log('读取失败')
+//   // 转化为DOM
+//   const { document } = new JSDOM().window
+//   // 获取分类列表
+//   // console.log(document.body)
+//   const categorys = getCategory(document),
+//   cateDetail = getCatDetail(document)
+//   // recommends = getRecomments(document)
 
-}
+//   // console.log('es', recommends[0])
+// }
 
-start().catch(e => console.log(e))
+// start().catch(e => console.log(e))
 
 const app = new Koa()
 const router = new Router()
@@ -30,9 +33,13 @@ app.use(router.routes).use(router.allowedMethods())
 app.listen(3000)
 
 // 获取推荐内容 
-function getRecomment(document) {
-  const recommendEls = document.querySelectorAll('.recommend-card-wrapper')
+async function getRecomments(){
+  const {data} = await axios.get('https://sz.meituan.com/ptapi/recommends')
+
+  console.log(data)
 }
+getRecomments()
+
 
 // 获取详细分类
 function getCatDetail(document) {
@@ -140,20 +147,3 @@ Array.prototype.flat = function (n) {
   return result
 }
 
-// (async function () {
-//   const { data } = await axios.get('https://sz.meituan.com/')
-
-//   await writeFile('test.html', data)
-
-//   console.log('写入完成')
-
-//   function writeFile(path, data) {
-//     return new Promise((res, rej) => {
-//       fs.writeFile(path, data, err => {
-//         if (err) return rej(err)
-//         res()
-//       })
-//     })
-//   }
-
-// })()
