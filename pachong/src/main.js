@@ -43,7 +43,7 @@ async function getRecomments(){
 
   console.log(data)
 }
-getRecomments()
+// getRecomments()
 
 
 // 获取详细分类
