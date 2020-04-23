@@ -32,6 +32,7 @@ router.get('/', async ctx => {
 app.use(router.routes).use(router.allowedMethods())
 app.listen(3000)
 
+<<<<<<< HEAD
 // 获取推荐内容 
 async function getRecomments(){
   const {data} = await axios.get('https://sz.meituan.com/ptapi/recommends', {
@@ -45,6 +46,8 @@ async function getRecomments(){
 }
 // getRecomments()
 
+=======
+>>>>>>> ce16fe3a0f498dd0e3d9c2cf7664671bd6f46922
 
 // 获取详细分类
 function getCatDetail(document) {
