@@ -67,7 +67,18 @@ class Database {
     }
   }
 
-   
+  // 更新数据
+  async updateOne(query, rule, upsert = false) {
+    if (this.client === null) return console.log("数据库未链接")
+    return new Promise((res, rej) => {
+      this.collection.updateOne(query, rule, { upsert }, (err, { result }) => {
+        if (err) return rej(`数据更新出错：${err.message}`)
+        console.log(`匹配数据 ${result.n} 条，修改 ${result.nModified} 条， 成功 ${result.ok} 条`)
+        res()
+      })
+    })
+  }
+
   // 关闭与数据库连接
   close() {
     this.client.close()
@@ -75,25 +86,3 @@ class Database {
     console.log('已关闭与数据库的链接')
   }
 }
-
-
-
-async function st() {
-  const db  = new Database(url)
-  await db.connect('test', 'coll')
-  // await db.updataOne({
-  //   name: 'li'
-  // }, {
-  //   $set: {
-  //     name: 'ok'
-  //   }
-  // })
-  const data = await db.find()
-  database.close()
-  console.log(data)
-}
-
-
-st().catch(e => {
-  console.log(e)
-})
