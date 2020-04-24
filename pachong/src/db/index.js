@@ -36,6 +36,15 @@ class Database {
     return client
   }
 
+  // 切换集合
+  collection(collection) {
+    this.collection = this.db.collection(collection)
+  }
+
+  // 切换数据库
+  db(dbname) {
+    this.db = this.client.db(dbname)
+  }
   // 添加数据
   async insert(doc) {
     if (this.client === null) return console.log('增加数据失败: 数据库未链接')

@@ -10,16 +10,16 @@ let exportData = null
 
 async function start() {
   let webStr = await readFile('../static/meituan.html')
-  if (!webStr) return console.log('读取失败')
+
   // 转化为DOM
-  const { document } = new JSDOM().window
+  const { document } = new JSDOM(webStr).window
   // 获取分类列表
-  // console.log(document.body)
   const categorys = getCategory(document),
-  cateDetail = getCatDetail(document)
-  // recommends = getRecomments(document)
-  console.log(cateDetail)
-  // console.log('es', recommends[0])
+  cateDetail = getCatDetail(document),
+  bottonnav = getBottonNav(document)
+  
+  console.log(bottonnav)
+
 }
 
 start().catch(e => console.log('err: ', e))
@@ -29,93 +29,99 @@ const router = new Router()
 router.get('/', async ctx => {
   ctx.body = 'ok'
 })
-app.use(router.routes).use(router.allowedMethods())
+
+app.use(router.routes()).use(router.allowedMethods())
 app.listen(3000)
 
 
-// 获取详细分类
-// function getCatDetail(document) {
-//   let cat_id = 0
-//   const details = []
-//   // 获取所有分类并遍历每个分类
-//   Array.from(document.querySelectorAll('.category-nav-detail'))
-//   .forEach(categoryNavDetail => {
-//     // 获取当前分类的所有详细分类并遍历
-//     cat_id++
-//     let det_id = 1
-//     const detail = []
-//     Array.from(categoryNavDetail.querySelectorAll('.detail-area'))
-//     .forEach(detailArea => {
-//       const title = detailArea.querySelector('.detail-title').textContent,
-//       detailsArr = []
-//       // 遍历所有详细分类，获取详细分类内容
-//       Array.from(detailArea.querySelectorAll('.detail-text'))
-//       .forEach(detailText => {
-//         detailsArr.push({
-//           det_id,
-//           index: `${det_id}_${detailsArr.length + 1}`,
-//           text: detailText.textContent,
-//           href: detailText.href
-//         })
-//       })
-//       det_id++
-//       detail.push({
-//         title,
-//         cat_id,
-//         details: detailsArr
-//       })
-//     })
-//   })
-//   console.log(details)
-//   return details
-// }
+// 获得栈底导航
+function getBottonNav(document) {
+  const bottonNavs = []
 
+  Array.from(document.querySelectorAll('.b-n-classification'))
+  .forEach((classification, index) => {
+    const title = classification.querySelector('.b-n-subtitle').textContent,
+    c_id = index + 1,
+    items = []
+
+    Array.from(classification.querySelectorAll('.b-n-list-item > a'))
+    .forEach((a, indey) => {
+      items.push({
+        c_id,
+        index: `${c_id}_${indey + 1}`,
+        href: a.href,
+        text: a.textContent
+      })
+    })
+
+    bottonNavs.push({
+      c_id,
+      title,
+      items
+    })
+  })
+
+  return bottonNavs
+}
+
+// 获取详细分类
 function getCatDetail(document) {
   let cat_id = 0
   const categorys = []
-  // 获取所有分类并遍历每个分类
-  Array.from(document.querySelectorAll('.category-nav-detail'))
-  .forEach(categoryNavDetail => {
-    // 获取当前分类的所有详细分类并遍历
-    cat_id++
-
+  // 获取分类列表每一行，并遍历
+  Array.from(document.querySelectorAll('.b-n-list-item > a'))
+  .forEach((categoryNavDetail , catIndex) => {
+    
+    cat_id = catIndex + 1
+    
+    // 获取当前行的所有分类，并遍历
     Array.from(categoryNavDetail.querySelectorAll('.detail-area'))
+    .forEach((detailArea, detailIndex) => {
+      const detail_id = detailIndex + 1
+      const details = []
+      const title = detailArea.querySelector('.detail-title').textContent
+
+      // 获取当前分类所有详细分类内容
+      Array.from(detailArea.querySelectorAll('.detail-text'))
+      .forEach((detailText, index) => {
+        details.push({
+          cat_id,
+          detail_id,
+          index: `${cat_id}_${detail_id}_${index}`,
+          text: detailText.textContent,
+          href: detailText.href
+        })
+      })
+
+      // 添加分类
+      categorys.push({
+      cat_id,
+      index: `${cat_id}_${detail_id}`,
+      title,
+      details
+    })
+    })
   })
  
-  return details
+  return categorys
 }
-
-
-// 创建分类索引
-// function createCatIndex(categorys) {
-//   const cat = categorys.flat(5).map(item => {
-//     return [
-//       item.text,
-//       {
-//         index: item.index,
-//         cat_id: item.cat_id
-//       }
-//     ]
-//   })
-//   return new Map(cat)
-// }
 
 // 获取分类列表
 function getCategory(dom) {
   const categorys = []
   // 获取分类列
-  Array.from(dom.querySelectorAll('.nav-li')).forEach(li => {
-    const cat = []
-    Array.from(li.querySelectorAll('.nav-text')).forEach(a => {
+  Array.from(dom.querySelectorAll('.nav-li'))
+  .forEach((navLi, catIndex) => {
+    Array.from(navLi.querySelectorAll('.nav-text'))
+    .forEach((navText, textIndex) => {
       // 获取分类信息
-      cat.push({
-        cat_id: categorys.length + 1,
-        index: `${categorys.length + 1}_${cat.length + 1}`,
-        text: a.textContent,
-        href: a.href
+      categorys.push({
+        cat_id: catIndex + 1,
+        index: `${catIndex+ 1}_${textIndex + 1}`,
+        text: navText.textContent,
+        href: navText.href
       })
     })
-    categorys.push(cat)
   })
 
   return categorys
