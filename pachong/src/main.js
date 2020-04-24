@@ -8,21 +8,21 @@ const { JSDOM } = require('jsdom');
 let exportData = null
 
 
-// async function start() {
-//   let webStr = await readFile('./static/meituan.html')
-//   if (!webStr) return console.log('读取失败')
-//   // 转化为DOM
-//   const { document } = new JSDOM().window
-//   // 获取分类列表
-//   // console.log(document.body)
-//   const categorys = getCategory(document),
-//   cateDetail = getCatDetail(document)
-//   // recommends = getRecomments(document)
+async function start() {
+  let webStr = await readFile('../static/meituan.html')
+  if (!webStr) return console.log('读取失败')
+  // 转化为DOM
+  const { document } = new JSDOM().window
+  // 获取分类列表
+  // console.log(document.body)
+  const categorys = getCategory(document),
+  cateDetail = getCatDetail(document)
+  // recommends = getRecomments(document)
+  console.log(cateDetail)
+  // console.log('es', recommends[0])
+}
 
-//   // console.log('es', recommends[0])
-// }
-
-// start().catch(e => console.log(e))
+start().catch(e => console.log('err: ', e))
 
 const app = new Koa()
 const router = new Router()
@@ -34,37 +34,57 @@ app.listen(3000)
 
 
 // 获取详细分类
+// function getCatDetail(document) {
+//   let cat_id = 0
+//   const details = []
+//   // 获取所有分类并遍历每个分类
+//   Array.from(document.querySelectorAll('.category-nav-detail'))
+//   .forEach(categoryNavDetail => {
+//     // 获取当前分类的所有详细分类并遍历
+//     cat_id++
+//     let det_id = 1
+//     const detail = []
+//     Array.from(categoryNavDetail.querySelectorAll('.detail-area'))
+//     .forEach(detailArea => {
+//       const title = detailArea.querySelector('.detail-title').textContent,
+//       detailsArr = []
+//       // 遍历所有详细分类，获取详细分类内容
+//       Array.from(detailArea.querySelectorAll('.detail-text'))
+//       .forEach(detailText => {
+//         detailsArr.push({
+//           det_id,
+//           index: `${det_id}_${detailsArr.length + 1}`,
+//           text: detailText.textContent,
+//           href: detailText.href
+//         })
+//       })
+//       det_id++
+//       detail.push({
+//         title,
+//         cat_id,
+//         details: detailsArr
+//       })
+//     })
+//   })
+//   console.log(details)
+//   return details
+// }
+
 function getCatDetail(document) {
   let cat_id = 0
+  const categorys = []
   // 获取所有分类并遍历每个分类
-  return Array.from(document.querySelectorAll('.category-nav-detail'))
-  .map(categoryNavDetail => {
+  Array.from(document.querySelectorAll('.category-nav-detail'))
+  .forEach(categoryNavDetail => {
     // 获取当前分类的所有详细分类并遍历
     cat_id++
-    let det_id = 1
-    return Array.from(categoryNavDetail.querySelectorAll('.detail-area'))
-    .map(detailArea => {
-      const title = detailArea.querySelector('.detail-title').textContent,
-      detailsArr = []
-      // 遍历所有详细分类，获取详细分类内容
-      Array.from(detailArea.querySelectorAll('.detail-text'))
-      .forEach(detailText => {
-        detailsArr.push({
-          det_id,
-          index: `${det_id}_${detailsArr.length + 1}`,
-          text: detailText.textContent,
-          href: detailText.href
-        })
-      })
-      det_id++
-      return {
-        title,
-        cat_id,
-        details: detailsArr
-      }
-    })
+
+    Array.from(categoryNavDetail.querySelectorAll('.detail-area'))
   })
+ 
+  return details
 }
+
 
 // 创建分类索引
 // function createCatIndex(categorys) {
@@ -105,7 +125,7 @@ function getCategory(dom) {
 function readFile(path) {
   return new Promise((res, rej) => {
     fs.readFile(path, (err, data) => {
-      if (err) return rej(false)
+      if (err) return rej(`文件读取失败： ${err.message}`)
       res(data.toString())
     })
   })
