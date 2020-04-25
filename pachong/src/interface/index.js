@@ -13,7 +13,7 @@ async function getRecommend() {
   return data
 }
 
-async function getmMovie(){
+async function getMovie(){
   const { data, status, statusText } = await instance.get(config.movieInterface  )
   if (status !== 200) return console.log(`getmMovie Error: ${statusText}[code:${status}]`)
   console.log('电影内容获取成功')
@@ -21,9 +21,11 @@ async function getmMovie(){
 }
 
 async function getCityList(){
-  const { data, status, statusText } = await instance.get(config.cityListInterface  )
-  if (status !== 200) return console.log(`getCityList Error: ${statusText}[code:${status}]`)
-  console.log('民宿城市获取成功')
+  const { data } = await instance.get(config.cityListInterface , {
+    params: {}
+  })
+  if (data.status !== 0) return console.log(`getCityList Error: ${data.message}[code:${data.status}]`)
+  console.log('城市列表获取成功')
   return data.cityList
 }
 
@@ -34,6 +36,13 @@ async function getMinsu(cityId){
     }
   })
   if (status !== 200) return console.log(`getMinsu Error: ${statusText}[code:${status}]`)
-  console.log('电影内容获取成功')
+  console.log('民宿获取成功')
   return data.productList
+}
+
+module.exports = {
+  getRecommend,
+  getMovie,
+  getCityList,
+  getMinsu
 }

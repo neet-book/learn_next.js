@@ -37,26 +37,28 @@ class Database {
   }
 
   // 切换集合
-  collection(collection) {
+  coll(collection) {
     this.collection = this.db.collection(collection)
+    return this
   }
 
   // 切换数据库
   db(dbname) {
     this.db = this.client.db(dbname)
+    return this
   }
   // 添加数据
   async insert(doc) {
-    if (this.client === null) return console.log('增加数据失败: 数据库未链接')
+    if (this.client === null || this.collection === null) return console.log('增加数据失败: 数据库未链接或未选择集合')
     if (!Array.isArray(doc)) doc = [doc]
     return new Promise(res => {
-      this.collection.insertMany(doc, (err, { result }) =>　{
-        if (!err) {
-          console.log(`添加 ${result.n} 条数据, 成功 ${result.ok} 条`)
+      this.collection.insertMany(doc, (err, re) =>　{
+        console.log(re)
+        if (err) {
+          console.log(err.message)
           return res()
         }
-  
-        console.log(err)
+        console.log(`添加 ${re.result.n} 条数据, 成功 ${re.result.ok} 条`)
         res()
       })
     })
@@ -94,30 +96,6 @@ class Database {
 
     
   }
-<<<<<<< HEAD
-  
-  // 增
-  async insert(doc) {
-    return new Promise(res => {
-      if (!Array.isArray(doc)) doc = [doc]
-      this.collection.insertMany(doc, (err, result) => {
-        if (err) {
-          console.log(`数据添加失败：`, err)
-        } else {
-          console.log(`跟新数据成功`)
-        }
-        res()
-      })
-    })
-  }
-}
-
-const d = new Database()
-d.client('test', 'coll')
-.then(() => {
-
-})
-=======
 
   // 关闭与数据库连接
   close() {
@@ -126,4 +104,5 @@ d.client('test', 'coll')
     console.log('已关闭与数据库的链接')
   }
 }
->>>>>>> bd661368f8114c725e15034fe92726e304d37e39
+
+module.exports = Database
