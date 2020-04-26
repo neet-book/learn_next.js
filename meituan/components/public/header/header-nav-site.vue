@@ -18,6 +18,14 @@
         <nuxt-link to="site.link" target="_blank">{{ site.title }}</nuxt-link>
       </dd>
     </dl>
+    <dl class="sites app-site">
+      <dt>手机应用</dt>
+      <dd v-for="app of apps" :key="app.name">
+        <nuxt-link :to="app.link" target=_blank>
+          <img :src="app.src" :alt="app.name">
+        </nuxt-link>
+      </dd>
+    </dl>
   </div>
 </template>
 
@@ -61,32 +69,85 @@ export default class HeaderNavSite extends Vue {
     { title: '北美票房榜', link: '#' },
     { title: '电影排行榜', link: '#' },
   ]
+
+  apps = [
+    {
+      name: '美团app',
+      src: '/image/icon/meituan.png',
+      link: '#'
+    },
+    {
+      name: '外卖app',
+      src: '/image/icon/waimai.png',
+      link: '#'
+    },
+    {
+      name: '民宿app',
+      src: '/image/icon/minsu.png',
+      link: '#'
+    },
+    {
+      name: '点评app',
+      src: '/image/icon/dianping.png',
+      link: '#'
+    },
+    {
+      name: '猫眼app',
+      src: 'image/icon/maoyan.png',
+      link: '#'
+    }
+  ]
 }
 </script>
 
 
 <style scoped>
 .header-nav-site {
-  display: flex;
+  box-sizing: border-box;
   width: 1200px;
-  justify-content: space-between;
+  padding: 30px 36px 36px 47px;
+  
+  background-color: #fff;
+  border-color: #E5E5E5;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.1);
+  text-align: center;
+}
+img {
+  width: 60px;
+  height: 60px;
 }
 
 .sites {
-  padding: 30px 36px 36px 47px;
+  float: left;
+  margin-left: 40px;
 }
-.sites > dt {
-  font-size: 14px;
-  color: var(--color-title);
-  margin-bottom: 26px;
+
+.sites > dd {
+  float: left;
 }
-.sites dd > a {
-  display: block;
-  font-size: 12px;
-  color: var(--color-tint);
+
+dd > a {
   text-decoration: none;
+  color: var(--color-tint)
 }
-.sites dd > a:hover {
-  color: var(--color-hover)
+
+.hostel-site > dd {
+  width: 33%;
+}
+.hostel-site > dd {
+  width: 33%;
+}
+
+.restauran-site {
+  width: 156px;
+}
+.restauran-site > dd {
+  width: 50%;
+}
+
+.movie-site > dd {
+  width: 100%;
 }
 </style>

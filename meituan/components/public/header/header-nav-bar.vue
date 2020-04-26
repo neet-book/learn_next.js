@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ul class="header-nav-first clear-fix">
-      <li>
+      <!-- <li>
         <header-nav-menu :list="list"/>
       </li>
       <li>
@@ -9,7 +9,7 @@
       </li>
       <li>
         <header-nav-menu :list="[{ title: '手机App', link: '#' }]"/>
-      </li>
+      </li> -->
       <li>
         <span>网站导航</span>
         <header-nav-site />

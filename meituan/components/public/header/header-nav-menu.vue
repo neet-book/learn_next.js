@@ -46,7 +46,7 @@ export default class HeaderNavMenu extends Vue {
 
 .menu-list:hover {
   overflow: visible;
-    background-color: #fff;
+  background-color: #fff;
   border-color: #E5E5E5;
   box-shadow: 0 3px 5px 0 rgba(0,0,0,0.1);
 }
