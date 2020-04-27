@@ -1,18 +1,18 @@
 <template>
   <nav>
     <ul class="header-nav-first clear-fix">
-      <!-- <li>
+      <li>
         <header-nav-menu :list="list"/>
       </li>
       <li>
         <header-nav-menu :list="list2"/>
       </li>
       <li>
-        <header-nav-menu :list="[{ title: '手机App', link: '#' }]"/>
-      </li> -->
-      <li>
+        <a href="#" target="_blank" class="app">手机app</a>
+      </li>
+      <li class="header-nav-last">
         <span>网站导航</span>
-        <header-nav-site />
+        <header-nav-site class="head-nav-site-extend" />
       </li>
     </ul>
   </nav>
@@ -48,11 +48,30 @@ export default class HeaderNavBar extends Vue {
 </script>
 
 <style scpoed>
+  .header-nav-first {
+    position: relative;
+  }
+
   .header-nav-first > li{
     list-style: none;
     height: 40px;
     font-size: 12px;
     float: left;
     box-sizing: border-box;
+  }
+  .header-nav-last > span, .app{
+  height: 40px;
+  padding: 12px 14px;
+  font-size: 12px;
+  line-height: 40px;
+  text-decoration: none;
+  color: var(--color-tint);
+  list-style: none;
+  box-sizing: border-box;
+  }
+  .head-nav-site-extend {
+    position: absolute;
+    top: 40px;
+    right: 0;
   }
 </style>

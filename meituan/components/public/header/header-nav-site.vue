@@ -1,5 +1,5 @@
 <template>
-  <div class="header-nav-site">
+  <div class="header-nav-site clear-flex">
     <dl class="sites hostel-site">
       <dt>酒店旅游</dt>
       <dd v-for="site of hostelSite" :key="site.title">
@@ -103,6 +103,9 @@ export default class HeaderNavSite extends Vue {
 
 <style scoped>
 .header-nav-site {
+  display: flex;
+  justify-content: space-between;
+
   box-sizing: border-box;
   width: 1200px;
   padding: 30px 36px 36px 47px;
@@ -114,27 +117,29 @@ export default class HeaderNavSite extends Vue {
   box-shadow: 0 3px 5px 0 rgba(0,0,0,0.1);
   text-align: center;
 }
+
+.header-nav-site::after {
+  content: ""
+}
 img {
   width: 60px;
   height: 60px;
 }
 
-.sites {
-  float: left;
-  margin-left: 40px;
-}
-
 .sites > dd {
   float: left;
+  width: 20%;
+}
+.sites > dt {
+  margin-bottom: 26px;
 }
 
 dd > a {
   text-decoration: none;
   color: var(--color-tint)
 }
-
-.hostel-site > dd {
-  width: 33%;
+.hostel-site {
+  width: 234px;
 }
 .hostel-site > dd {
   width: 33%;
@@ -147,7 +152,18 @@ dd > a {
   width: 50%;
 }
 
+.movie-site {
+  width: 90px;
+}
 .movie-site > dd {
   width: 100%;
+}
+
+.app-site {
+  width: 380px;
+}
+
+.app-site > dd{
+  margin: auto;
 }
 </style>

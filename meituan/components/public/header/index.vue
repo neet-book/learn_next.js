@@ -4,10 +4,10 @@
     <div class="header-bar">
       <div class="header-bar-container">
         <!-- 位置与用户入口 -->
-        <!-- <div class="hader-bar-position">
+        <div class="hader-bar-position">
           <position current="深圳" :nearby="nearbyCity" />
           <user-entry user="suer" :is-loging="false" />
-        </div> -->
+        </div>
          <!-- 导航栏 -->
         <div class="header-bar-nav">
           <header-nav-bar />
