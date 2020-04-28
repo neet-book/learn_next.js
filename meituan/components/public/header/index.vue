@@ -15,7 +15,9 @@
       </div>
     </div>
     <!-- 头部内容 -->
-    <div class="header-content"></div>
+    <div class="header-content">
+      <search-bar class="header-content-search" />
+    </div>
   </header>
 </template>
 
@@ -25,11 +27,13 @@ import { Vue, Component } from 'nuxt-property-decorator'
 import Position from './position.vue'
 import UserEntry from './user-entry.vue'
 import HeaderNavBar from './header-nav-bar.vue'
+import SearchBar from '~/components/common/search-bar.vue'
 @Component({
   components: {
     Position,
     UserEntry,
-    HeaderNavBar
+    HeaderNavBar,
+    SearchBar
   }
 })
 export default class CommonHeader extends Vue {
@@ -70,24 +74,24 @@ export default class CommonHeader extends Vue {
   flex-wrap: nowrap;
 }
 
-.header-bar-position {
-  /* flex: 0 */
+.header-bar-position, .header-bar-nav {
   display: inline-block;
-  /* float: left; */
 }
 
-.header-bar-nav {
-  /* flex: 0 */
-  display: inline-block;
-  /* float: right; */
+.user-entry {
+  margin-left: 30px;
 }
 
 .header-content {
   background: white;
   height: 157px;
+  position: relative;
 }
 
-.user-entry {
-  margin-left: 30px;
+.header-content-search {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
 }
 </style>
