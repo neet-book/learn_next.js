@@ -6,7 +6,7 @@
         <!-- 位置与用户入口 -->
         <div class="hader-bar-position">
           <position current="深圳" :nearby="nearbyCity" />
-          <user-entry user="suer" :is-loging="false" />
+          <user-entry user="suer" :is-loging="false" class="user-entry" />
         </div>
          <!-- 导航栏 -->
         <div class="header-bar-nav">
@@ -85,5 +85,9 @@ export default class CommonHeader extends Vue {
 .header-content {
   background: white;
   height: 157px;
+}
+
+.user-entry {
+  margin-left: 30px;
 }
 </style>
