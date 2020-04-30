@@ -11,22 +11,19 @@
     <!-- 搜索建议 -->
     <div class="search-bar-suggest" v-show="showSuggest">
       <!-- 搜索历史 -->
-      <div class="search-history">
+      <div class="search-history" v-show="showHistory">
         <h6>搜索历史</h6>
         <ul class="search-result-list">
-          <li v-for="his of history" :key="his.id">
-            <nuxt-link :to="his.link" target="_blank">{{ his.text }}</nuxt-link>
+          <li v-for="his of history" :key="his.id" @click="content = his.text">
+           {{ his.text }}
           </li>
         </ul>
       </div>
       <!-- 搜索推荐 -->
-      <div class="search-suggest-content">
+      <div class="search-suggest-content" v-show="!showHistory">
         <ul class="search-result-list">
-          <li>
-            <nuxt-link to="#" target="_blank">001</nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="#" target="_blank">00551</nuxt-link>
+          <li v-for="sug of suggests" :key="sug.id" @click="choseSuggest(sug.text)">
+            <nuxt-link :to="sug.link" target="_blank">{{ sug.text }}</nuxt-link>
           </li>
         </ul>
       </div>
@@ -40,28 +37,60 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 interface Suggest {
   id: string | number
   text: string
-  link: string
+  link?: string
 }
 @Component
 export default class SearchBar extends Vue {
   @Prop(String) placeholder: string | undefined
   content: any = ''
   showSuggest: boolean = false;
-  suggests: Suggest[] = [{ id: 0, link: '#', text: '' }]
-  history: Suggest[] = [{ id: 0, link: '#', text: '' }]
-  focusSearch(): void {
-    this.showSuggest = true
-    const history: Suggest[] = JSON.parse(window.localStorage.getItem('searchHistory'))
-
-
+  suggests: Suggest[] = []
+  history: Suggest[] = []
+  // hook
+  mounted() {
+    const localHistory = window.localStorage.getItem('search-history')
+    this.history =  localHistory ?  JSON.parse(localHistory) : [{ id: 0, text: '', link: '#' }]
   }
 
+  // methods
+
+  // 搜索框获得焦点
+  focusSearch(): void {
+    this.showSuggest = true
+  }
+
+  // 失去焦点
   blurSearch(): void {
     this.showSuggest = false
   }
 
+  // 提交搜索内容
   submitSearch(): void {
+    const serchContent: string = this.content
+    this.history.push({
+      id: this.history.length,
+      text: serchContent
+    })
+    this.saveHistory()
+  }
 
+  // 选择推荐项
+  choseSuggest(text: string): void {
+    this.history.push({
+      id: this.history.length,
+      text
+    })
+
+    this.saveHistory()
+  }
+
+  // 存储历史记录
+  saveHistory(): void {
+    window.localStorage.setItem('search-history', JSON.stringify(this.history))
+  }
+  // computed
+  get showHistory() {
+    return this.content === ''
   }
 }
 </script>
