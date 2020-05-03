@@ -16,7 +16,10 @@
     </div>
     <!-- 头部内容 -->
     <div class="header-content">
-      <search-bar class="header-content-search" />
+      <div class="header-content-container">
+        <div class="logo"><img src="/image/logo.png" alt="logo"></div>
+        <search-bar class="header-content-search" />
+      </div>
     </div>
   </header>
 </template>
@@ -87,11 +90,22 @@ export default class CommonHeader extends Vue {
   height: 157px;
   position: relative;
 }
-
+.header-content-container {
+  max-width: 1190px;
+  margin: auto;
+}
 .header-content-search {
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%)
+  top: 28px;
+  transform: translateX(-50%);
+}
+.logo {
+  display: inline-block;
+  padding-top: 28px;
+}
+.logo > img{
+  width: 126px;
+  height: 46px;
 }
 </style>

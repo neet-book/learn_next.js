@@ -118,9 +118,7 @@ export default class HeaderNavSite extends Vue {
   text-align: center;
 }
 
-.header-nav-site::after {
-  content: ""
-}
+
 img {
   width: 60px;
   height: 60px;

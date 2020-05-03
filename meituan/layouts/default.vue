@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <common-header />
     <main>
       <nuxt />
@@ -25,4 +25,7 @@ export default class DefaultLayout extends Vue {
 </script>
 
 <style scoped>
+.container {
+  min-width: 660px;
+}
 </style>

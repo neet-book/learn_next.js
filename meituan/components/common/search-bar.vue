@@ -3,8 +3,9 @@
     <input
       v-model="content"
       :placeholder="placeholder"
-      @focus="focusSearch"
-      @blur="blurSearch"
+      @focus="showSuggest = true"
+      @blur="showSuggest = false"
+      @input="getSuggest"
       class="search-input"
     >
     <button class="search-button" @click="submitSearch"><span class="el-icon-search"></span></button>
@@ -14,15 +15,15 @@
       <div class="search-history" v-show="showHistory">
         <h6>搜索历史</h6>
         <ul class="search-result-list">
-          <li v-for="his of history" :key="his.id" @click="content = his.text">
-           {{ his.text }}
+          <li v-for="his of history" :key="his.id">
+           <nuxt-link :to="his.link" target="_blank">{{ his.text }}</nuxt-link>
           </li>
         </ul>
       </div>
       <!-- 搜索推荐 -->
       <div class="search-suggest-content" v-show="!showHistory">
         <ul class="search-result-list">
-          <li v-for="sug of suggests" :key="sug.id" @click="choseSuggest(sug.text)">
+          <li v-for="sug of suggests" :key="sug.id" @click="choseSuggest(sug)">
             <nuxt-link :to="sug.link" target="_blank">{{ sug.text }}</nuxt-link>
           </li>
         </ul>
@@ -31,9 +32,9 @@
   </div>
 </template>
 
-
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
+import { throttle } from '~/static/script/util'
 interface Suggest {
   id: string | number
   text: string
@@ -44,25 +45,15 @@ export default class SearchBar extends Vue {
   @Prop(String) placeholder: string | undefined
   content: any = ''
   showSuggest: boolean = false;
-  suggests: Suggest[] = []
+  suggests: Suggest[] = [{ id: 0, text: 'o', link: '#' }]
   history: Suggest[] = []
   // hook
   mounted() {
     const localHistory = window.localStorage.getItem('search-history')
-    this.history =  localHistory ?  JSON.parse(localHistory) : [{ id: 0, text: '', link: '#' }]
+    this.history =  localHistory ?  JSON.parse(localHistory) : []
   }
 
   // methods
-
-  // 搜索框获得焦点
-  focusSearch(): void {
-    this.showSuggest = true
-  }
-
-  // 失去焦点
-  blurSearch(): void {
-    this.showSuggest = false
-  }
 
   // 提交搜索内容
   submitSearch(): void {
@@ -73,14 +64,21 @@ export default class SearchBar extends Vue {
     })
     this.saveHistory()
   }
+  // 获得搜索推荐
+  getSuggest =  throttle(function () {
 
+  }, 1000)
   // 选择推荐项
-  choseSuggest(text: string): void {
-    this.history.push({
-      id: this.history.length,
-      text
-    })
+  choseSuggest(sug: Suggest): void {
+    let has: boolean = false
+    for (const his of this.history) {
+      if (his.text === sug.text) {
+        has = true
+        break
+      }
+    }
 
+    if (has) this.history.unshift(sug)
     this.saveHistory()
   }
 

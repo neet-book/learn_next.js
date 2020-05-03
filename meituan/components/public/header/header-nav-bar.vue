@@ -51,6 +51,7 @@ export default class HeaderNavBar extends Vue {
 <style scpoed>
   .header-nav-first {
     position: relative;
+    z-index: 999;
   }
 
   .header-nav-first > li{
@@ -81,6 +82,20 @@ export default class HeaderNavBar extends Vue {
     border-color: #E5E5E5;
     box-shadow: 0 3px 5px 0 rgba(0,0,0,0.1);
   }
+
+  .head-nav-site-extend::before {
+    content: "";
+    display: inline-block;
+    width: 76px;
+    height: 6px;
+    background-color: #fff;
+    position: absolute;
+    top: -3px;
+    right: 0;
+
+    z-index: 999;
+  }
+
   .head-nav-site-extend {
     position: absolute;
     top: 40px;
