@@ -38,10 +38,12 @@ export default class Position extends Vue {
 .position {
   color: #999;
   font-size: 12px;
+  text-align: center;
   display: inline-block;
 }
 .change-city, .guess-city {
   text-decoration: none;
+  text-align: center;
 }
 .change-city:hover, .guess-city:hover{
   color: #FE8C00;
