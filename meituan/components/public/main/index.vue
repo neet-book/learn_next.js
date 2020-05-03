@@ -1,7 +1,6 @@
 <template>
   <div class="main-body">
-    <div class="banner">
-    </div>
+    
   </div>
 </template>
 

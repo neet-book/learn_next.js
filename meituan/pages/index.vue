@@ -1,14 +1,22 @@
 <template>
   <div class="container">
-
+    <div class="banner">
+      <div class="banner-left">
+        <category-nav />
+      </div>
+    </div>
   </div>
 </template>
 
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import Logo from '~/components/Logo.vue'
-@Component
+import CategoryNav from '@/components/public/main/category/category-nav.vue'
+@Component({
+  components: {
+    CategoryNav
+  }
+})
 export default class Index extends Vue {
 
 }
