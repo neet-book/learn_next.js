@@ -2,6 +2,9 @@ const Koa = require('koa')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
+// 接口
+const DetailCateInterface = require('./interface/detailCateInterface.js')
+
 const app = new Koa()
 
 // Import and Set Nuxt.js options
@@ -23,6 +26,10 @@ async function start () {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
+  // 接口
+  // 详细分类接口
+  app.use(DetailCateInterface.routes()).use(DetailCateInterface.allowedMethods())
 
   app.use((ctx) => {
     ctx.status = 200

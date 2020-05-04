@@ -2,7 +2,7 @@
   <div class="detail-container">
     <div
       class="detail-are"
-      v-for="cat of catDetails"
+      v-for="cat of detailCats"
       :key="cat.index"
     >
       <div class="detail-title-wrapper">
@@ -28,10 +28,7 @@ import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 @Component
 export default class CategoryNavDetail extends Vue {
-  @Prop(Array) catDetails: any[] | undefined
-  mounted() {
-    console.log(this.catDetails)
-  }
+  @Prop(Array) detailCats: any[] | undefined
 }
 </script>
 
