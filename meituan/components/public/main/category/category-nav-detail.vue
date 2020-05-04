@@ -6,18 +6,18 @@
       :key="cat.index"
     >
       <div class="detail-title-wrapper">
-        <h3>{{ cat.title }}</h3>
-        <i class="cl-icon-arrow-right">更多</i>
+        <span>{{ cat.title }}</span>
+        <span>更多<i class="el-icon-arrow-right"></i></span>
       </div>
       <div class="detail-content">
-        <nuxt-link
+        <a
           v-for="detail of cat.details"
-          :to="detail.href"
+          :href="detail.href"
           :key="detail.index"
           target="_blank"
         >
           {{ detail.text }}
-        </nuxt-link>
+        </a>
       </div>
     </div>
   </div>
@@ -39,5 +39,33 @@ export default class CategoryNavDetail extends Vue {
 .detail-container {
   width: 400px;
   background-color: #fff;
+  padding: 0 30px;
+  box-sizing: border-box;
+  /* height: 100%; */
+}
+
+.detail-title-wrapper span:last-child {
+  font-size: 12px;
+  color: var(--color-tint);
+  float: right;
+}
+
+.detail-title-wrapper {
+  margin-top: 24px;
+  height: 22px;
+  line-height: 22px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.detail-content > a {
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--color-tint);
+  margin: 10px 13px 0 0;
+}
+
+.detail-content > a:hover {
+  color: var(--color-hover);
 }
 </style>

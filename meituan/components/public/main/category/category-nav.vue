@@ -111,10 +111,10 @@ export default class CategoryNav extends Vue {
   width: 230px;
   background-color: #fff;
   border: 1px solid #e5e5e5;
-  padding-bottom: 8px;
 }
 .category-container {
   position: relative;
+  padding-bottom: 8px;
 }
 .category-title {
   color: #666;
@@ -149,7 +149,7 @@ export default class CategoryNav extends Vue {
 /* 详细分类 */
 .category-nav-detail {
   position: absolute;
-  right: -100%;
+  left: 100.5%;
   top: 0;
 }
 </style>
