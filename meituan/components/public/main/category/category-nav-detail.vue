@@ -1,5 +1,6 @@
 <template>
   <div class="detail-container">
+    <!-- 头部 -->
     <div
       class="detail-are"
       v-for="cat of detailCats"
@@ -9,6 +10,7 @@
         <span>{{ cat.title }}</span>
         <span>更多<i class="el-icon-arrow-right"></i></span>
       </div>
+      <!-- 主体 -->
       <div class="detail-content">
         <a
           v-for="detail of cat.details"

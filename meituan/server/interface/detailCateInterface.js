@@ -20,12 +20,27 @@ async function getDetail() {
 // 获取数据
 let details
 
-getDetail().then(re => {
+getDetail()
+.then(re => {
   details = re
+})
+.catch( err => {
+  details = false
+  console.log('detail获取失败', err.message)
 })
 
 router.get('/detail', async ctx => {
-  ctx.body = details
+  details === false ?
+  ctx.body = {
+    state: 202,
+    message: 'detail数据获取失败',
+    data: []
+  } :
+  ctx.body = {
+    state: 200,
+    message: 'detail数据获取成功',
+    data: details
+  }
 })
 
 module.exports = router
