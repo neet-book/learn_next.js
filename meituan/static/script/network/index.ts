@@ -7,7 +7,7 @@ const instance = axios.create({
 export async function getDetails() {
   const { data: { state, message, data } } = await instance('/detail')
   if (state !== 200) {
-    console.log(message)
+    console.log('getDetails Error: ', message)
   }
 
   return data

@@ -22,7 +22,7 @@
         </li>
       </ul>
       <category-nav-detail
-      v-for="cat of catDetails"
+      v-for="cat of detailCategorys"
       :key="cat.cat_id"
       :catDetails="cat.details"
       class="category-nav-detail"/>
@@ -40,7 +40,7 @@ import CategoryNavDetail from './category-nav-detail.vue'
 })
 export default class CategoryNav extends Vue {
   currentCat: number | boolean = 0
-
+  inject: string[] = ['detailCategorys']
   categoryList = [
     {
       cat_id: 1,

@@ -3,18 +3,25 @@ const database = require('../db/index.js')
 const router = new Router()
 
 async function getDetail() {
-  // 获取数据库实例
-  const db = await database
+  // 链接数据库获取数据库实例
+  const db = await database.connect('meituan')
   await db.coll('detail')
   //获取数据库数据
   const detailArr = await db.find()
-  const details = []
+  const totla = []
+  const detailsCat = []
   // 整理数据
   for (const detail of detailArr) {
-    details[detail.cat_id] === undefined ? details[detail.cat_id] = [detail] : details[detail.cat_id].push(detail)
+    totla[detail.cat_id] === undefined ? totla[detail.cat_id] = [detail] : totla[detail.cat_id].push(detail)
   }
 
-  return details
+  totla.forEach((details, cat_id) => {
+    detailsCat.push({
+      cat_id,
+      details
+    })
+  })
+  return detailsCat
 }
 
 // 获取数据
@@ -26,7 +33,7 @@ getDetail()
 })
 .catch( err => {
   details = false
-  console.log('detail获取失败', err.message)
+  console.log('detail获取失败', err)
 })
 
 router.get('/detail', async ctx => {

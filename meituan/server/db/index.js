@@ -105,4 +105,4 @@ class Database {
   }
 }
 
-module.exports = new Database(url).connect('meituan')
+module.exports = new Database(url)
