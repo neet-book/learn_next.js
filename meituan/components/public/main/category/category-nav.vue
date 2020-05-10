@@ -1,13 +1,12 @@
 <template>
   <div class="category">
     <h3 class="category-title">全部分类</h3>
-    <div class="category-container">
+    <div class="category-container" @mouseleave="currentCat = false">
       <ul>
         <li class="category-li"
           v-for="category of categoryList"
           :key="category.cat_id"
           @mouseover="currentCat = category.cat_id"
-          @mouseleave="currentCat = false"
         >
           <nuxt-link
             v-for="(cat, index) of category.cats"
@@ -21,11 +20,14 @@
           <i class="el-icon-arrow-right"></i>
         </li>
       </ul>
+      <!-- 详细分类 -->
       <category-nav-detail
-      v-for="cat of detailCategorys"
-      :key="cat.cat_id"
-      :catDetails="cat.details"
-      class="category-nav-detail"/>
+        v-for="cat of detailCategorys"
+        :key="cat.cat_id"
+        :detail-cats="cat.details"
+        class="category-nav-detail"
+        v-show="currentCat === cat.cat_id"
+      />
     </div>
   </div>
 </template>
@@ -36,11 +38,17 @@ import CategoryNavDetail from './category-nav-detail.vue'
 @Component({
   components: {
     CategoryNavDetail
-  }
+  },
+  inject: ['detailCategorys'],
 })
 export default class CategoryNav extends Vue {
-  currentCat: number | boolean = 0
-  inject: string[] = ['detailCategorys']
+  currentCat: number | boolean = 11
+  detailCategorys: undefined
+
+  mounted() {
+    console.log(this.detailCategorys)
+  }
+
   categoryList = [
     {
       cat_id: 1,
@@ -73,34 +81,6 @@ export default class CategoryNav extends Vue {
         text: '小吃',
         link: '#'
       }]
-    }
-  ]
-
-  catDetails = [
-    {
-      cat_id: 1,
-      details: [
-        {
-          title: '机票',
-          cat_id: 1,
-          details: [
-            { 
-              "cat_id" : 1,
-              "detail_id" : 1,
-              "index" : "1_1_0",
-              "text" : "代金券",
-              "href" : "https://sz.meituan.com/meishi/c393/"
-            },
-            {
-              "cat_id" : 1,
-              "detail_id" : 1,
-              "index" : "1_1_1",
-              "text" : "甜点饮品",
-              "href" : "https://sz.meituan.com/meishi/c11/"
-            }
-          ]
-        }
-      ]
     }
   ]
 }

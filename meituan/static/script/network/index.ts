@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://loacalhost:3000'
+  baseURL: 'http://localhost:3000'
 })
 
 export async function getDetails() {
@@ -12,8 +12,3 @@ export async function getDetails() {
 
   return data
 }
-
-
-
-
-export default instance
