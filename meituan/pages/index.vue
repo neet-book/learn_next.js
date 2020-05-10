@@ -1,12 +1,14 @@
 <template>
   <div class="container">
     <!-- banner区域 -->
-    <div class="banner">
+    <div class="banner clear-fix">
       <div class="banner-left">
         <category-nav />
       </div>
       <div class="banner-right">
-        <banner-nav-bar />
+        <banner-nav-bar class="home-header-nav"/>
+        <div class="banner-content">
+        </div>
       </div>
     </div>
   </div>
@@ -61,7 +63,18 @@ export default class Index extends Vue {
   margin: auto;
 }
 .banner-left {
+  float: left;
   position: relative;
   top: -53px;
+}
+
+.banner-right {
+  float: left;
+}
+
+.home-header-nav {
+  position: relative;
+  top: -40px;
+  left: 20px;
 }
 </style>

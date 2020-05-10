@@ -5,7 +5,7 @@
       :key='item.id'
       :to="item.href"
       :class="item.color "
-      class="nva-item"
+      class="nav-item"
       target="_blank"
     >
       {{ item.text }}
@@ -66,6 +66,14 @@ export default class BannerNavBar extends Vue {
 </script>
 
 <style scoped>
+.nav-item{
+  font-weight: 700;
+  font-size: 16px;
+  color: #222;
+  margin: 0 20px;
+  text-decoration: none;
+}
+
 .yellow:hover {
   color: #fbc700;
 }
