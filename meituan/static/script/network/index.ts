@@ -12,3 +12,12 @@ export async function getDetails() {
 
   return data
 }
+
+export async function getCategory() {
+  const { data: { state, message, data } } = await instance('/category')
+  if (state !== 200) {
+    console.log('getCategory Error: ', message)
+  }
+
+  return data
+}

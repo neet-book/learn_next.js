@@ -31,10 +31,6 @@ import { Component, Vue, Prop } from 'nuxt-property-decorator'
 @Component
 export default class CategoryNavDetail extends Vue {
   @Prop(Array) detailCats: any[] | undefined
-
-  mounted() {
-    console.log('dc', this.detailCats)
-  }
 }
 </script>
 
@@ -72,7 +68,7 @@ export default class CategoryNavDetail extends Vue {
   color: var(--color-hover);
 }
 
-.detail-are:last-child {
+/* .detail-are:last-child {
   margin-bottom: 15px;
-}
+} */
 </style>

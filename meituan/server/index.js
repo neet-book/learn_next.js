@@ -4,6 +4,7 @@ const { Nuxt, Builder } = require('nuxt')
 
 // 接口
 const DetailCateInterface = require('./interface/detailCateInterface.js')
+const CategoryInterface = require('./interface/categoryInterface.js')
 
 const app = new Koa()
 
@@ -28,6 +29,9 @@ async function start () {
   }
 
   // 接口
+
+  // 分类接口
+  app.use(CategoryInterface.routes()).use(CategoryInterface.allowedMethods())
   // 详细分类接口
   app.use(DetailCateInterface.routes()).use(DetailCateInterface.allowedMethods())
 

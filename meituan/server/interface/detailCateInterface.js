@@ -1,19 +1,16 @@
 const Router = require('koa-router')
-const Database = require('../db/index.js')
 const router = new Router()
 
 async function getDetail() {
-  // 链接数据库获取数据库实例
-  const db = new Database()
-  await db.connect('meituan', 'detail').catch(e => console.log(e))
-  // //获取数据库数据
-  const detailArr = await db.find().catch(e => {
-    console('数据获取失败', e)
-    return []
-  })
+  const database = await require('../db/index.js')
+  //获取数据库数据
+  database.coll('detail')
+  const detailArr = await database.find()
+
+  // 整理数据
   const totla = []
   const detailsCat = []
-  // // 整理数据
+
   for (const detail of detailArr) {
     totla[detail.cat_id] === undefined ? totla[detail.cat_id] = [detail] : totla[detail.cat_id].push(detail)
   }
@@ -35,7 +32,7 @@ getDetail()
   details = re
 }).catch( err => {
   details = false
-  console.log('detail获取失败 -> ', err.message)
+  console.log('detail获取失败 -> ', err)
 })
 
 router.get('/detail', async ctx => {

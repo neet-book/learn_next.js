@@ -4,13 +4,13 @@
     <div class="category-container" @mouseleave="currentCat = false">
       <ul>
         <li class="category-li"
-          v-for="category of categoryList"
+          v-for="category of categorys"
           :key="category.cat_id"
           @mouseover="currentCat = category.cat_id"
         >
           <nuxt-link
             v-for="(cat, index) of category.cats"
-            :to="cat.link"
+            :to="cat.href"
             :key="cat.index"
             target="_blank"
           >
@@ -39,50 +39,11 @@ import CategoryNavDetail from './category-nav-detail.vue'
   components: {
     CategoryNavDetail
   },
-  inject: ['detailCategorys'],
+  inject: ['categorys', 'detailCategorys'],
 })
 export default class CategoryNav extends Vue {
-  currentCat: number | boolean = 11
-  detailCategorys: undefined
-
-  mounted() {
-    console.log(this.detailCategorys)
-  }
-
-  categoryList = [
-    {
-      cat_id: 1,
-      cats:
-      [{
-        cat_id: 1,
-        index: '1.1',
-        text: '美食',
-        link: '#'
-      },
-      {
-        cat_id: 2,
-        index: '1.2',
-        text: '小吃',
-        link: '#'
-      }]
-    },
-    {
-      cat_id: 2,
-      cats:
-      [{
-        cat_id: 2,
-        index: '2.1',
-        text: '美食',
-        link: '#'
-      },
-      {
-        cat_id: 2,
-        index: '2.2',
-        text: '小吃',
-        link: '#'
-      }]
-    }
-  ]
+  currentCat: number | boolean = false
+  categorys: undefined
 }
 </script>
 
@@ -128,6 +89,7 @@ export default class CategoryNav extends Vue {
 
 /* 详细分类 */
 .category-nav-detail {
+  height: 100%;
   position: absolute;
   left: 100.5%;
   top: 0;
