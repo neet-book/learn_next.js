@@ -3,7 +3,7 @@ const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://127.0.0.1:27017'
 
 class Database {
-  constructor (url) {
+  constructor () {
     this.url = url
     this.db = null
     this.collection = null
@@ -12,19 +12,23 @@ class Database {
 
   // 连接数据库
   async connect (db, collection) {
-   
     let client = this.client
-    if (client) return 
+    if (client !== null) return 
 
+    const instance = this
     // 创建客户端实例 
     client = new MongoClient(this.url, {
       useUnifiedTopology: true
     })
     
     // 链接服务器
-    await new Promise((res, rej)=> {
+    await new Promise((res)=> {
       client.connect(err => {
-        if (err) return rej(`数据库连接失败：${err.message}`)
+        if (err) {
+          console.log(`数据库连接失败：${err.message}`)
+          rej(instance)
+          return
+        }
         console.log('数据库连接成功')
         res()
       })
@@ -33,11 +37,12 @@ class Database {
     if (client && db) this.db = client.db(db)
     if (client && collection) this.collection = client.db(db).collection(collection)
     this.client = client
-    return this
+    return instance
   }
 
   // 切换集合
   coll(collection) {
+    if (this.db === null && this.client === null) throw new Error('数据库未指定或服务器未链接')
     this.collection = this.db.collection(collection)
     return this
   }
@@ -71,10 +76,10 @@ class Database {
     try {
       const docs = await this.collection.find(query).limit(limit).toArray()
 
-      console.log(`共查询到${docs.length}条数据`)
+      console.log(`共获取到${docs.length}条数据`)
       return docs
     } catch(e) {
-      throw new Error(`数据查询失败： ${e.message}`)
+      throw new Error(`数据获取失败： ${e.message}`)
     }
   }
 
@@ -105,4 +110,4 @@ class Database {
   }
 }
 
-module.exports = Database
+module.exports  = new Database().connect('meituan')

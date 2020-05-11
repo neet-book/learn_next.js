@@ -1,11 +1,11 @@
 <template>
   <div class="detail-container">
-    <!-- 头部 -->
     <div
       class="detail-are"
       v-for="cat of detailCats"
       :key="cat.index"
     >
+      <!-- 头部 -->
       <div class="detail-title-wrapper">
         <span>{{ cat.title }}</span>
         <span>更多<i class="el-icon-arrow-right"></i></span>
@@ -13,12 +13,12 @@
       <!-- 主体 -->
       <div class="detail-content">
         <a
-          v-for="detail of cat.details"
-          :href="detail.href"
-          :key="detail.index"
+          v-for="item of cat.details"
+          :href="item.href"
+          :key="item.index"
           target="_blank"
         >
-          {{ detail.text }}
+          {{ item.text }}
         </a>
       </div>
     </div>
@@ -67,4 +67,8 @@ export default class CategoryNavDetail extends Vue {
 .detail-content > a:hover {
   color: var(--color-hover);
 }
+
+/* .detail-are:last-child {
+  margin-bottom: 15px;
+} */
 </style>
