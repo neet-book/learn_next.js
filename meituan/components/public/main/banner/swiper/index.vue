@@ -49,7 +49,7 @@ export default class Swiper extends Vue {
   }
 
   setOpacity() {
-
+    
   }
 }
 </script>

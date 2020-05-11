@@ -22,7 +22,7 @@ class Database {
     })
     
     // 链接服务器
-    await new Promise((res)=> {
+    await new Promise((res, rej)=> {
       client.connect(err => {
         if (err) {
           console.log(`数据库连接失败：${err.message}`)
@@ -110,4 +110,6 @@ class Database {
   }
 }
 
-module.exports  = new Database().connect('meituan')
+const database = new Database().connect('meituan').catch(i => i)
+
+module.exports  = database
