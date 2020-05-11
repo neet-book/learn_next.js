@@ -25,7 +25,7 @@ export default class Swiper extends Vue {
 
   // prop
   @Prop(Array)items: any[] | undefined
-  
+
   // hook
 
   mounted() {
@@ -38,7 +38,8 @@ export default class Swiper extends Vue {
   }
 
   handleDom(): void {
-    let count = this.$refs.conRef.querySelectorAll('.swiper-item')
+    const container: Element = this.$refs.conRef<Element>
+    this.count = container.querySelectorAll('.swiper-item')
   }
 }
 </script>
