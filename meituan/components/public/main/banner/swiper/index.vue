@@ -1,8 +1,14 @@
 <template>
   <div class="swiper">
     <div class="swiper-conteier" ref="conRef">
-      <a>
-        <img>
+      <a
+        v-for="i of items"
+        :key="i.id"
+        :href="i.href"
+        target="_blank"
+        class="swiper-item"
+      >
+        <img :src="i.src" :alt="i.dis">
       </a>
     </div>
     <div class="btn-pre"></div>
@@ -38,8 +44,12 @@ export default class Swiper extends Vue {
   }
 
   handleDom(): void {
-    const container: Element = this.$refs.conRef<Element>
-    this.count = container.querySelectorAll('.swiper-item')
+    const container: Element = this.$refs.conRef as Element
+    this.count = container.querySelectorAll('.swiper-item').length
+  }
+
+  setOpacity() {
+
   }
 }
 </script>
@@ -47,6 +57,18 @@ export default class Swiper extends Vue {
 <style scoped>
 .swiper {
   position: relative;
+}
+
+.swiper-container {
+  position: relative;
+}
+
+.swiper-item {
+  position: absolute;
+}
+
+.swiper-item img{
+  width: 550px;
 }
 
 .swiper-indicator {
