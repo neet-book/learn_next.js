@@ -7,8 +7,7 @@
       </div>
       <div class="banner-right">
         <banner-nav-bar class="home-header-nav"/>
-        <div class="banner-content">
-        </div>
+        <banner-content />
       </div>
     </div>
   </div>
@@ -20,11 +19,13 @@ import { getCategory, getDetails } from '~/static/script/network/index'
 
 import BannerNavBar from '~/components/public/main/banner/banner-nav-bar.vue'
 import CategoryNav from '~/components/public/main/category/category-nav.vue'
+import BannerContent from '~/components/public/main/banner/banner-content.vue'
 
 @Component({
   components: {
     CategoryNav,
-    BannerNavBar
+    BannerNavBar,
+    BannerContent
   },
   // 通过provied为子组件提供数据
   provide() {
