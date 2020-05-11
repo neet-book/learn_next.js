@@ -1,11 +1,12 @@
 const Router = require('koa-router')
-const database = require('../db/index.js')
+const Database = require('../db/index.js')
 const router = new Router()
 
 async function getDetail() {
   // 链接数据库获取数据库实例
-  const db = await database.connect('meituan')
-  await db.coll('detail')
+  const db = new Database()
+  await db.connect('meituan', 'detail')
+
   //获取数据库数据
   const detailArr = await db.find()
   const totla = []

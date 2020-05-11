@@ -105,4 +105,4 @@ class Database {
   }
 }
 
-module.exports = new Database(url)
+module.exports = Database

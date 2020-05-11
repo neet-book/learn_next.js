@@ -71,6 +71,7 @@ export default class SearchBar extends Vue {
   // 选择推荐项
   choseSuggest(sug: Suggest): void {
     let has: boolean = false
+    // 如果已经有相同的历史则不添加
     for (const his of this.history) {
       if (his.text === sug.text) {
         has = true
