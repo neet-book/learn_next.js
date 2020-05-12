@@ -3,7 +3,8 @@
     <div
       v-for="n of count"
       :key="n"
-      :class="{ acitve: currentItem === n }"
+      :class="{ acitve: currentItem === n - 1 }"
+      @click="$emit('click', n - 1)"
       class="indicator-slider"
     ></div>
   </div>
@@ -25,7 +26,7 @@ export default class Indicator extends Vue {
 .indicator-slider {
   width: 10px;
   height: 5px;
-  background: red;
+  background: white;
   opacity: 0.5;
   transform: opacity 0.3s easy;
   float: left;
