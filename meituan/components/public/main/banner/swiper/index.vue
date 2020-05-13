@@ -14,12 +14,12 @@
       >
         <img :src="i.src" :alt="i.dis">
       </a>
+      <!-- 按钮 -->
+      <div class="btn btn-pre" @click="toPre"><i class="el-icon-arrow-left"></i></div>
+      <div class="btn btn-next" @click="toNext"><i class="el-icon-arrow-right"></i></div>
+      <!-- 指示器 -->
+      <indicator class="swiper-indicator" :count="count" :currentItem="currentIndex" @click="toItem($event)" />
     </div>
-    <!-- 按钮 -->
-    <div class="btn-pre" @click="toPre"></div>
-    <div class="btn-next" @click="toNext"></div>
-    <!-- 指示器 -->
-    <indicator class="swiper-indicator" :count="count" :currentItem="currentIndex" @click="toItem($event)" />
   </div>
 </template>
 
@@ -43,7 +43,6 @@ export default class Swiper extends Vue {
   mounted() {
     // 操作DOM获取轮播图数量
     this.handleDom()
-
     this.start()
   }
 
@@ -105,25 +104,22 @@ export default class Swiper extends Vue {
     this.stop()
     let [index, next] = this.checkIndex(this.currentIndex + 1, this.nextIndex + 1)
     this.setIndex(index, next)
-    this.start
+    this.start()
   }
 
   toPre() {
     this.stop()
     let [index, next] = this.checkIndex(this.currentIndex - 1, this.nextIndex - 1)
     this.setIndex(index, next)
-    this.start
+    this.start()
   }
 
   toItem(index: number) {
-    this.stop()
-    let next = index + 1
-
-    [index, next] = this.checkIndex(index, next)
-    
+    this.stop() 
+    let next: number
+    [index, next] = this.checkIndex(index, index + 1)
     this.setIndex(index, next)
-    this.start
-
+    this.start()
   }
 }
 </script>
@@ -131,8 +127,33 @@ export default class Swiper extends Vue {
 <style scoped>
 .swiper {
   position: relative;
-  width: 550px;
-  height: 240px;
+}
+
+.btn {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  color: white;
+  opacity: 0.5;
+  border-radius: 50%;
+  background: black;
+  z-index: 100;
+}
+
+.btn-pre {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px
+}
+
+.btn-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px
 }
 
 .swiper-container {

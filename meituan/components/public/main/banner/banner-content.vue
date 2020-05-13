@@ -1,6 +1,6 @@
 <template>
   <div class="banner-content">
-    <swiper :items="swiperItems" />
+    <swiper :items="swiperItems" class="banner-swiper" />
   </div>
 </template>
 
@@ -49,5 +49,8 @@ export default class BannerContent extends Vue {
 </script>
 
 <style scoped>
-
+.banner-swiper {
+  width: 550px;
+  height: 240px;
+}
 </style>
