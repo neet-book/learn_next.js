@@ -1,15 +1,20 @@
 <template>
   <div class="banner-content">
-    <swiper :items="swiperItems" class="banner-swiper" />
+    <div class="banner-row clear-fix">
+      <swiper :items="swiperItems" class="banner-swiper" />
+      <loging class="banner-loging" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue} from 'nuxt-property-decorator'
 import Swiper from '~/components/public/main/banner/swiper/index.vue'
+import Loging from '~/components/public/main/banner/loging.vue'
 @Component({
   components: {
-    Swiper
+    Swiper,
+    Loging
   }
 })
 export default class BannerContent extends Vue {
@@ -52,5 +57,10 @@ export default class BannerContent extends Vue {
 .banner-swiper {
   width: 550px;
   height: 240px;
+  float: left;
+}
+
+.banner-loging {
+  float: left;
 }
 </style>
