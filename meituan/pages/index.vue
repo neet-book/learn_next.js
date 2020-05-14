@@ -10,6 +10,8 @@
         <banner-content />
       </div>
     </div>
+    <!-- 电影推荐区域 -->
+    <movie-list />
   </div>
 </template>
 
@@ -20,12 +22,14 @@ import { getCategory, getDetails } from '~/static/script/network/index'
 import BannerNavBar from '~/components/public/main/banner/banner-nav-bar.vue'
 import CategoryNav from '~/components/public/main/category/category-nav.vue'
 import BannerContent from '~/components/public/main/banner/banner-content.vue'
+import MovieList from '~/components/public/main/movie/movie-list.vue'
 
 @Component({
   components: {
     CategoryNav,
     BannerNavBar,
-    BannerContent
+    BannerContent,
+    MovieList
   },
   // 通过provied为子组件提供数据
   provide() {

@@ -117,13 +117,14 @@ export default class BannerContent extends Vue {
 
 .banner-loging {
   float: left;
+  margin-left: 10px;
 }
 
 .banner-item-first {
   float: left;
   height: 240px;
   width:150px;
-  margin: 0 10px;
+  margin-left: 10px;
   background-repeat: no-repeat;
   background-size: 150px 240px;
 }
@@ -172,5 +173,11 @@ export default class BannerContent extends Vue {
 .qrcode-box img {
   width: 95px;
   height: 95px;
+}
+
+@media screen and (max-width: 1200px) {
+  .banner-item-second:nth-child(3), .banner-item-first {
+    display: none;
+  }
 }
 </style>
