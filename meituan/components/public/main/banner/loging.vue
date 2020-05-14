@@ -7,17 +7,19 @@
         <img src="/image/icon/avatar.jpg" alt="用户头像">
         <p class="user-name">Hi! 你好</p>
       </div>
-      <button class="btn">注册</button>
-      <button class="btn">登录</button>
+      <button class="btn" @click="logon">注册</button>
+      <button class="btn" @click="loging">登录</button>
     </div>
     <!-- 已登录 -->
     <div class="loging-contaier" v-show="true">
-      <div class="setting-row"><a><i class="el-icon-setting"></i></a></div>
+      <div class="setting-row">
+        <a target="_blank" href="/user/setting">
+          <i class="el-icon-setting"></i>
+        </a>
+      </div>
       <!-- 用户信息 -->
-      <a>
-        <div class=header-img-row><img src="/image/icon/head-img.png" alt="用户头像"></div>
-        <p class="user-name">你好 {{ username }}</p>
-      </a>
+      <div class=header-img-row><img src="/image/icon/head-img.png" alt="用户头像"></div>
+      <p class="user-name">你好 {{ username }}</p>
       <!-- 功能 -->
       <div class="fn">
         <div class="fn-row clear-fix">
@@ -54,13 +56,22 @@ import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component
 export default class Loging extends Vue {
-  username: string = 'user'
+  get username():string {
+    return this.$store.state?.user?.username
+  }
   get isLoging(): boolean {
-    return false
+    return this.$store.state?.user === null
+  }
+
+  loging(): void {
+    this.$router.push('/loging')
+  }
+
+  logon():void {
+    this.$router.push('/logon')
   }
 }
 </script>
-
 
 <style scoped>
 .loging {
@@ -93,7 +104,6 @@ export default class Loging extends Vue {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 
 .btn {
   width: 118px;
@@ -140,7 +150,10 @@ export default class Loging extends Vue {
   position: absolute;
   top: 5px;
   right: 5px;
-  font-size: 20px;
+  font-size: 20px;  
+}
+
+.setting-row a {
   color: #666;
 }
 </style>

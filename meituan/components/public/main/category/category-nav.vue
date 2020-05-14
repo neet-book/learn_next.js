@@ -49,6 +49,7 @@ export default class CategoryNav extends Vue {
 
 <style scoped>
 .category {
+  box-sizing: border-box;
   width: 230px;
   background-color: #fff;
   border: 1px solid #e5e5e5;

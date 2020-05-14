@@ -59,9 +59,10 @@ export default class Index extends Vue {
 </script>
 
 <style scoped>
-.banner {
-  max-width: 1190px;
-  margin: auto;
+.container {
+  max-width: 1200px;
+  min-width: 950px;
+  margin: 0 auto;
 }
 .banner-left {
   float: left;
@@ -71,11 +72,13 @@ export default class Index extends Vue {
 
 .banner-right {
   float: left;
+  margin: 10px 0 0 10px;
+  position: relative;
 }
 
 .home-header-nav {
-  position: relative;
-  top: -40px;
+  top: -50px;
   left: 20px;
+  position: absolute;
 }
 </style>
