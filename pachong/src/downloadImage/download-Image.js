@@ -5,6 +5,7 @@ const ur = require('url')
 
 function parserFileName(url) {
   let pathname = new URL(url).pathname
+  
   return path.basename(pathname)
 }
 
@@ -49,12 +50,13 @@ module.exports = async function downloadImg(dir, url) {
   // 获取文件名
   const name = parserFileName(url)
   // 下载图片
-  await axios.get(url, { responseType: 'stream' })
+  const imgUrl = 'https://p0.meituan.net/msmerchant/' + name + '@250w_150h_1e_1c'
+  await axios.get(imgUrl, { responseType: 'stream' })
   .then(({ data }) => {
     // 保存文件
     data.pipe(fs.createWriteStream(`${dir}/${name}`))
   })
 
   console.log(`图片 ${name} 下载成功，保存至${dir}`)
-  return name
+
 }

@@ -7,47 +7,47 @@ const Database = require('./db')
 const { getRecommend, getMovie, getCityList, getMinsu } = require('./interface')
 
 async function start() {
-  let webStr = await readFile('./static/meituan.html')
+  // let webStr = await readFile('./static/meituan.html')
 
   // 转化为DOM
-  const { document } = new JSDOM(webStr).window
+  // const { document } = new JSDOM(webStr).window
 
   // 链接数据库
   const db = new Database('mongodb://127.0.0.1:27017/')
   await db.connect('meituan')
 
   // 获取页面静态数据
-  const categorys = getCategory(document)  // 分类
-  const cateDetail = await getCatDetail(document)  // 详细分类
-  await db.coll('category').insert(categorys)
-  await db.coll('detail').insert(cateDetail) 
+  // const categorys = getCategory(document)  // 分类
+  // const cateDetail = await getCatDetail(document)  // 详细分类
+  // await db.coll('category').insert(categorys)
+  // await db.coll('detail').insert(cateDetail) 
 
-  const bottonnav = getBottonNav(document)  // 底部导航
-  await db.coll('botton-nav').insert(bottonnav)
+  // const bottonnav = getBottonNav(document)  // 底部导航
+  // await db.coll('botton-nav').insert(bottonnav)
 
-  const footerLinks = getFooter(document)
-  await db.coll('footer-link').insert(footerLinks)
+  // const footerLinks = getFooter(document)
+  // await db.coll('footer-link').insert(footerLinks)
 
   // 通过接口获取动态渲染内容
   const recommend = await getRecommend()
   await db.coll('recommend').insert(recommend)
 
-  const movies = await getMovie()
-  await db.coll('movies').insert(movies)
+  // const movies = await getMovie()
+  // await db.coll('movies').insert(movies)
 
-  const cityList = await getCityList()
-  await db.coll('citys').insert(cityList)
+  // const cityList = await getCityList()
+  // await db.coll('citys').insert(cityList)
 
-  const minsuList =  []
-  for(let { cityId, cityName } of cityList) {
-    const minsu = await getMinsu(cityId)
-    minsuList.push({
-      cityId,
-      minsu
-    })
-  }
+  // const minsuList =  []
+  // for(let { cityId, cityName } of cityList) {
+  //   const minsu = await getMinsu(cityId)
+  //   minsuList.push({
+  //     cityId,
+  //     minsu
+  //   })
+  // }
 
-  await db.coll('minshu').insert(minsuList)
+  // await db.coll('minshu').insert(minsuList)
   db.close()
 }
 

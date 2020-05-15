@@ -92,14 +92,7 @@ class Database {
         console.log(`匹配数据 ${result.n} 条，修改 ${result.nModified} 条， 成功 ${result.ok} 条`)
         res()
       })
-
-      this.client = client
-      if (database) this.db = client.db(database)
-      if (collecton) this.collection = client.db(database).collection(collection)
-      return client
     })
-
-    
   }
 
   // 关闭与数据库连接
