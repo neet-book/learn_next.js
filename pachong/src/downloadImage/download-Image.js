@@ -43,14 +43,18 @@ function mkdir(dir) {
 
 // 下载文件
 module.exports = async function downloadImg(dir, url) {
+  // 确定文件夹是否存在
   const exist = await existDir(dir);
   if (!exist) await mkdir(dir);
-
+  // 获取文件名
   const name = parserFileName(url)
+  // 下载图片
   await axios.get(url, { responseType: 'stream' })
   .then(({ data }) => {
+    // 保存文件
     data.pipe(fs.createWriteStream(`${dir}/${name}`))
   })
 
   console.log(`图片 ${name} 下载成功，保存至${dir}`)
+  return name
 }
