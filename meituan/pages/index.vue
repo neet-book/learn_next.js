@@ -65,9 +65,10 @@ export default class Index extends Vue {
 <style scoped>
 .container {
   max-width: 1200px;
-  min-width: 950px;
+  min-width: 1030px;
   margin: 0 auto;
 }
+
 .banner-left {
   float: left;
   position: relative;

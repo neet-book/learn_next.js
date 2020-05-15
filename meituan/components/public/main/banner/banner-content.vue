@@ -141,11 +141,12 @@ export default class BannerContent extends Vue {
 
 /* 第二行banner项 */
 .banner-item-second:nth-child(2) {
-  margin: 10px 10px 0 10px;
+  margin: 10px 0 0 10px;
 }
 
 .banner-item-second:nth-child(3) {
   width: 150px;
+  margin: 10px 0 0 10px;
   background-size: 150px 165px;
 }
 

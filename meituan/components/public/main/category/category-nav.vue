@@ -56,7 +56,8 @@ export default class CategoryNav extends Vue {
 }
 .category-container {
   position: relative;
-  padding-bottom: 8px;
+  padding:0 8px;
+  margin-top: 10px;
 }
 .category-title {
   color: #666;
@@ -66,8 +67,10 @@ export default class CategoryNav extends Vue {
 
 .category-li {
   color: var(--color-normal);
+  box-sizing: border-box;
   font-size: 13px;
-  line-height: 20px;
+  line-height: 21px;
+  height: 26px;
   padding: 2px 12px;
   position: relative;
 }
@@ -80,7 +83,7 @@ export default class CategoryNav extends Vue {
 .category-li > i {
   position: absolute;
   line-height: 24px;
-  right: 12px;
+  right: 0px;
 }
 
 .category-li:hover {
@@ -93,6 +96,7 @@ export default class CategoryNav extends Vue {
   height: 100%;
   position: absolute;
   left: 100.5%;
-  top: 0;
+  top: 0px;
+  z-index: 200;
 }
 </style>
