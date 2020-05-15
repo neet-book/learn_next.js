@@ -3,12 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const ur = require('url')
 
-function parserFileName(url) {
-  let pathname = new URL(url).pathname
-  
-  return path.basename(pathname)
-}
-
 // 文件是否存在
 function existDir(dir) {
   return new Promise((res) => {
@@ -43,20 +37,20 @@ function mkdir(dir) {
 }
 
 // 下载文件
-module.exports = async function downloadImg(dir, url) {
+module.exports = async function downloadImg(dir, url, fileName) {
   // 确定文件夹是否存在
   const exist = await existDir(dir);
   if (!exist) await mkdir(dir);
-  // 获取文件名
-  const name = parserFileName(url)
-  // 下载图片
-  const imgUrl = 'https://p0.meituan.net/msmerchant/' + name + '@250w_150h_1e_1c'
-  await axios.get(imgUrl, { responseType: 'stream' })
+  // 获取图片
+  await axios.get(url, { responseType: 'stream' })
   .then(({ data }) => {
     // 保存文件
-    data.pipe(fs.createWriteStream(`${dir}/${name}`))
+    data.pipe(fs.createWriteStream(`${dir}/${fileName}`))
+    console.log(`图片 ${fileName} 下载成功，保存至${dir}`)
+    return true
   })
-
-  console.log(`图片 ${name} 下载成功，保存至${dir}`)
-
+  .catch(err => {
+    console.log(`图片 ${fileName} 下载失败：${err.message}`)
+    return false
+  })
 }

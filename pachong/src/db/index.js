@@ -3,7 +3,7 @@ const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://127.0.0.1:27017'
 
 class Database {
-  constructor () {
+  constructor (url) {
     this.url = url
     this.db = null
     this.collection = null
