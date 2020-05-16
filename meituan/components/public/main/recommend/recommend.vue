@@ -5,7 +5,7 @@
     </div>
     <div class="recommend-content">
       <recommend-item
-        v-for="rec of recommends"
+        v-for="rec of [recommends[0]]"
         :key="rec.itemId"
         :item="rec"
       />

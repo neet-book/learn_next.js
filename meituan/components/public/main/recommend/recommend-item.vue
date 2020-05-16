@@ -1,10 +1,10 @@
 <template>
   <a class="item-card" :href="item.detailUrl" target="_blank">
     <div class="image-box">
-      <img :src="item.imgUrl">
+      <img :src="item.imgSrc">
     </div>
     <div class="inof-box">
-      <h3>{{ img.title }}</h3>
+      <h3>{{ item.title }}</h3>
       <div class="score">
         <!-- 评价星数 -->
         <!-- <rate-star :max="5" :score="item.socre" /> -->
@@ -23,7 +23,7 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 interface Recommend {
   itemId: number
   title: string
-  img: string
+  imgSrc: string
   // 商店链接
   detailUrl: string
   lowPrice: number
@@ -45,5 +45,8 @@ export default class  extends Vue {
 </script>
 
 <style scoped>
-
+.item-card {
+  display: inline-block;
+  text-decoration: none;
+}
 </style>
