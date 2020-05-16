@@ -21,3 +21,12 @@ export async function getCategory() {
 
   return data
 }
+
+export async function getRecommend() {
+  const { data: { state, message, data } } = await instance('/recommend')
+  if (state !== 200) {
+    console.log('getRecommend Error: ', message)
+  }
+
+  return data
+}

@@ -110,6 +110,6 @@ class Database {
   }
 }
 
-const database = new Database().connect('meituan').catch(i => i)
+const database = new Database(url).connect('meituan').catch(i => i)
 
 module.exports  = database

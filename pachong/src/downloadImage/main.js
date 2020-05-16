@@ -19,16 +19,16 @@ async function getRecommentImage(db) {
   for(const rec of recommends) {
     const imgUrl = createImageUrl(rec.imgUrl)
     const filename = parserFileName(rec.imgUrl)
-    console.log(imgUrl)
-    // 获取图片
+    获取图片
     await downloadImage(dir, imgUrl, filename)
-    .then((re) => {
-      // 检查是否成功下载
+    Promise.resolve()
+    .then(() => {
+      检查是否成功下载
       if (!re) return
-      // 存储图片链接
+      存储图片链接
       db.updateOne(
         { _id: rec._id},
-        { $set: { url: `http://locolhose:3000/image/recommend${filename}` }},
+        { $set: { imgSrc: `http://locolhose:3000/image/recommend/${filename}` }},
         true
       )
     })

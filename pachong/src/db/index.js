@@ -87,9 +87,9 @@ class Database {
   async updateOne(query, rule, upsert = false) {
     if (this.client === null) return console.log("数据库未链接")
     return new Promise((res, rej) => {
-      this.collection.updateOne(query, rule, { upsert }, (err, { result }) => {
+      this.collection.updateOne(query, rule, { upsert }, (err, re) => {
         if (err) return rej(`数据更新出错：${err.message}`)
-        console.log(`匹配数据 ${result.n} 条，修改 ${result.nModified} 条， 成功 ${result.ok} 条`)
+        // console.log(`匹配数据 ${result.n} 条，修改 ${result.nModified} 条， 成功 ${result.ok} 条`)
         res()
       })
     })

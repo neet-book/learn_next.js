@@ -7,7 +7,7 @@
       <h3>{{ img.title }}</h3>
       <div class="score">
         <!-- 评价星数 -->
-        <rate-star :max="5" :score="item.socre">
+        <!-- <rate-star :max="5" :score="item.socre" /> -->
           <!-- 评论数 -->
         <div class="comment-line">{{ item.commentNumber }}个评价</div>
         <div class="area-line">{{ item.areaName }}</div>
@@ -23,7 +23,7 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 interface Recommend {
   itemId: number
   title: string
-  imgUrl: string
+  img: string
   // 商店链接
   detailUrl: string
   lowPrice: number
@@ -35,6 +35,7 @@ interface Recommend {
   score: number
   // 地区
   areaName: string
+  [key: string]: number | string
 }
 @Component
 export default class  extends Vue {
