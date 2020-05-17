@@ -1,7 +1,7 @@
 const Database = require('../db/index.js')
 const downloadImage = require('./download-Image.js')
 const path = require('path')
-
+const url = require('url')
 start().catch(e => console.log(e))
 
 async function start() {
@@ -19,13 +19,12 @@ async function getRecommentImage(db) {
   for(const rec of recommends) {
     const imgUrl = createImageUrl(rec.imgUrl)
     const filename = parserFileName(rec.imgUrl)
-    获取图片
+    // 获取图片
     await downloadImage(dir, imgUrl, filename)
-    Promise.resolve()
     .then(() => {
-      检查是否成功下载
+      // 检查是否成功下载
       if (!re) return
-      存储图片链接
+      // 存储图片链接
       db.updateOne(
         { _id: rec._id},
         { $set: { imgSrc: `http://locolhose:3000/image/recommend/${filename}` }},

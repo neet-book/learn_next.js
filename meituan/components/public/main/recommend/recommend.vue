@@ -4,8 +4,8 @@
       <span>推荐</span><span>为你甄选最适合的</span>
     </div>
     <div class="recommend-content">
-      <recommend-item
-        v-for="rec of [recommends[0]]"
+      <recommend-card
+        v-for="rec of recommends"
         :key="rec.itemId"
         :item="rec"
       />
@@ -15,10 +15,10 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import RecommendItem from './recommend-item.vue'
+import RecommendCard from './recommend-card.vue'
 @Component({
   components: {
-    RecommendItem
+    RecommendCard
   },
   inject: ['recommends']
 })
@@ -32,6 +32,56 @@ export default class  extends Vue {
 
 <style scoped>
 .recommend {
+  max-width: 1200px;
   height: 800px;
+}
+/* 头部 */
+.recommend-header{
+  box-sizing: border-box;
+  max-width: 1200px;
+  width: 100%;
+  height: 44px;
+  padding: 0 20px;
+  background: linear-gradient(to right, rgb(88, 174, 221) 2%, rgb(66, 191, 205) 97%) rgb(88, 174, 221);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+/* 组件头部内容 */
+.recommend-header span {
+  display: inline-block;
+  color: #fff;
+  height: 44px;
+  line-height: 44px;
+}
+
+.recommend-header span:nth-child(1) {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.recommend-header span:nth-child(2) {
+  font-size: 13px;
+  position: relative;
+}
+
+.recommend-header span:nth-child(2)::after {
+  content: "";
+  display: block;
+  width: 2px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid white;
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+}
+.recommend-content {
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: white;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
 </style>
