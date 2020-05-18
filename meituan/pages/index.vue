@@ -1,19 +1,20 @@
 <template>
   <div class="container">
-    <!-- banner区域 -->
     <div class="banner clear-fix">
+      <!-- 左边分类导航 -->
       <div class="banner-left">
         <category-nav />
       </div>
+      <!-- banner内容 -->
       <div class="banner-right">
         <banner-nav-bar class="home-header-nav"/>
         <banner-content />
       </div>
     </div>
-    <!-- 推荐区域 -->
-    <recommend />
     <!-- 电影推荐区域 -->
     <movie-list />
+    <!-- 推荐区域 -->
+    <recommend />
   </div>
 </template>
 
@@ -47,7 +48,7 @@ import MovieList from '~/components/public/main/movie/movie-list.vue'
 export default class Index extends Vue {
   detailCategorys: any[] | undefined
   categorys: any[] | undefined
-  recommends: any[] | undefined
+  recommends: Recommend[] | undefined
   // 获取数据
   async asyncData () {
     let detailCategorys: any = await getDetails().catch(e => {

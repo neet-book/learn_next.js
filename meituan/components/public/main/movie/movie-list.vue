@@ -1,7 +1,7 @@
 <template>
   <div class="movie-list">
     <div class="list-header">
-      <span>电影</span><span>即将上映</span><a>更多<i class="el-icon-arrow-right"></i></a>
+      <span>电影</span><span>即将上映</span><a href="https://maoyan.com/?utm_source=meituanweb">全部<i class="el-icon-arrow-right"></i></a>
     </div>
   </div>
 </template>
@@ -18,5 +18,10 @@ export default class MovieList extends Vue {
 <style scoped>
   .movie-list {
     height: 342px;
+  }
+
+  .list-header {
+    height: 44px;
+    background: linear-gradient(to right, rgb(250, 60, 104) 2%, rgb(254, 70, 77) 97%, rgb(250, 60, 104))
   }
 </style>

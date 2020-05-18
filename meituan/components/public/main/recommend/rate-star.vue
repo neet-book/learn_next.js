@@ -11,7 +11,6 @@
   </div>
 </template>
 
-
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
@@ -27,7 +26,6 @@ export default class RateStar extends Vue {
   }
 }
 </script>
-
 
 <style scoped>
 .rate-star-container {

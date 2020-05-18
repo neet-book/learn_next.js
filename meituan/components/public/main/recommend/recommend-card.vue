@@ -22,7 +22,8 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import RateStar from './rate-star.vue'
-interface Recommend {
+
+export interface Recommend {
   itemId: number
   title: string
   imgSrc: string
@@ -39,6 +40,7 @@ interface Recommend {
   areaName: string
   [key: string]: number | string
 }
+
 @Component({
   components: {
     RateStar
