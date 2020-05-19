@@ -8,7 +8,7 @@
         <h3>{{ item.title }}</h3>
         <div class="score">
           <!-- 评价星数 -->
-          <rate-star class="rate-star-box" :max="5" :score="item.score" />
+          <rate-star class="rate-star-box" :max="5" :score="parseFloat(item.score)" />
             <!-- 评论数 -->
           <div class="comment-line">{{ item.commentNum }}个评价</div>
           <div class="area-line">{{ item.areaName }}</div>

@@ -42,7 +42,7 @@ module.exports = async function downloadImg(dir, url, fileName) {
   const exist = await existDir(dir);
   if (!exist) await mkdir(dir);
   // 获取图片
-  await axios.get(url, { responseType: 'stream' })
+  const re =  await axios.get(url, { responseType: 'stream' })
   .then(({ data }) => {
     // 保存文件
     data.pipe(fs.createWriteStream(`${dir}/${fileName}`))
@@ -53,4 +53,6 @@ module.exports = async function downloadImg(dir, url, fileName) {
     console.log(`图片 ${fileName} 下载失败：${err.message}`)
     return false
   })
+
+  return re
 }
