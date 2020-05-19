@@ -30,3 +30,12 @@ export async function getRecommend() {
 
   return data
 }
+
+export async function getMovieList() {
+  const { data: { state, message, data } } = await instance('/recommend')
+  if (state !== 200) {
+    console.log('getMovieList Error: ', message)
+  }
+
+  return data
+} 

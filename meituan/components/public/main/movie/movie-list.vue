@@ -3,6 +3,11 @@
     <div class="list-header">
       <span>电影</span><span>即将上映</span><a href="https://maoyan.com/?utm_source=meituanweb">全部<i class="el-icon-arrow-right"></i></a>
     </div>
+    <div class="slide-container">
+      <div class="slide-wrap">
+        <movie-slide :movie="movie">
+      </div>
+    </div>
   </div>
 </template>
 

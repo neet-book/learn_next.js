@@ -30,7 +30,6 @@ export interface Recommend {
   // 商店链接
   detailUrl: string
   lowPrice: number
-  // 评论数
   commentNumber: number
   // 人均价格
   avgPrice: number
