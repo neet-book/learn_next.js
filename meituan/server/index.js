@@ -6,6 +6,7 @@ const { Nuxt, Builder } = require('nuxt')
 const DetailCateInterface = require('./interface/detailCateInterface.js')
 const CategoryInterface = require('./interface/categoryInterface.js')
 const RecommendInterface = require('./interface/recommendInterface.js')
+const MovieInterface = require('./interface/movieInterface.js')
 
 const app = new Koa()
 
@@ -37,6 +38,8 @@ async function start () {
   app.use(DetailCateInterface.routes()).use(DetailCateInterface.allowedMethods())
   // 推荐接口
   app.use(RecommendInterface.routes()).use(RecommendInterface.allowedMethods())
+  // 电影接口
+  app.use(MovieInterface.routes()).use(MovieInterface.allowedMethods())
 
   app.use((ctx) => {
     ctx.status = 200
@@ -53,3 +56,4 @@ async function start () {
 }
 
 start()
+

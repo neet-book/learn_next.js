@@ -5,7 +5,11 @@
     </div>
     <div class="slide-container">
       <div class="slide-wrap">
-        <movie-slide :movie="movie">
+        <movie-slide
+          v-for="movie of [movieList[0]]"
+          :key="movie.id"
+          :movie="movie"
+        />
       </div>
     </div>
   </div>
@@ -14,7 +18,9 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 
-@Component
+@Component({
+  inject: ['movieList']
+})
 export default class MovieList extends Vue {
 
 }

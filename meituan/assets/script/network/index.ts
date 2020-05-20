@@ -5,7 +5,7 @@ const instance = axios.create({
 })
 
 export async function getDetails() {
-  const { data: { state, message, data } } = await instance('/detail')
+  const { data: { state, message, data } } = await instance('/api/detail')
   if (state !== 200) {
     console.log('getDetails Error: ', message)
   }
@@ -14,7 +14,7 @@ export async function getDetails() {
 }
 
 export async function getCategory() {
-  const { data: { state, message, data } } = await instance('/category')
+  const { data: { state, message, data } } = await instance('/api/category')
   if (state !== 200) {
     console.log('getCategory Error: ', message)
   }
@@ -23,7 +23,7 @@ export async function getCategory() {
 }
 
 export async function getRecommend() {
-  const { data: { state, message, data } } = await instance('/recommend')
+  const { data: { state, message, data } } = await instance('/api/recommend')
   if (state !== 200) {
     console.log('getRecommend Error: ', message)
   }
@@ -32,7 +32,7 @@ export async function getRecommend() {
 }
 
 export async function getMovieList() {
-  const { data: { state, message, data } } = await instance('/recommend')
+  const { data: { state, message, data } } = await instance('/api/movie')
   if (state !== 200) {
     console.log('getMovieList Error: ', message)
   }
