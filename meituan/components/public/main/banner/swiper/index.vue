@@ -15,8 +15,8 @@
         <img :src="i.src" :alt="i.dis">
       </a>
       <!-- 按钮 -->
-      <div class="btn btn-pre" @click="toPre"><i class="el-icon-arrow-left"></i></div>
-      <div class="btn btn-next" @click="toNext"><i class="el-icon-arrow-right"></i></div>
+      <round-button direction="left" class="btn-pre" @click="toPre" />
+      <round-button direction="right" class="btn-next" @click="toNext" />
       <!-- 指示器 -->
       <indicator class="swiper-indicator" :count="count" :currentItem="currentIndex" @click="toItem($event)" />
     </div>
@@ -26,9 +26,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import Indicator from './indicator.vue'
+import RoundButton from '~/components/common/round-button.vue'
 @Component({
   components: {
-    Indicator
+    Indicator,
+    RoundButton
   }
 })
 export default class Swiper extends Vue {
@@ -127,19 +129,6 @@ export default class Swiper extends Vue {
 <style scoped>
 .swiper {
   position: relative;
-}
-
-.btn {
-  display: inline-block;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  line-height: 35px;
-  color: white;
-  opacity: 0.5;
-  border-radius: 50%;
-  background: black;
-  z-index: 100;
 }
 
 .btn-pre {

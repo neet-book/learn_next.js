@@ -1,16 +1,22 @@
 <template>
   <div class="movie-list">
     <div class="list-header">
-      <span>电影</span><span>即将上映</span><a href="https://maoyan.com/?utm_source=meituanweb">全部<i class="el-icon-arrow-right"></i></a>
+      <span>电影</span>
+      <span>即将上映</span>
+      <a href="https://maoyan.com/?utm_source=meituanweb">全部<i class="el-icon-arrow-right"></i></a>
     </div>
     <div class="slide-container">
-      <div class="slide-wrap">
+      <!-- 包裹所有电影滑块 -->
+      <div class="slide-wrap clear-fix" ref="wrapRef">
         <movie-slide
-          v-for="movie of [movieList[0]]"
+          class="slide"
+          v-for="movie of movieList"
           :key="movie.id"
           :movie="movie"
         />
       </div>
+      <round-button />
+      <round-button />
     </div>
   </div>
 </template>
@@ -18,21 +24,54 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 
+import RoundButton from '~/components/common/round-button.vue'
+import MovieSlide from './movie-slide.vue'
 @Component({
-  inject: ['movieList']
+  inject: ['movieList'],
+  components: {
+    RoundButton,
+    MovieSlide
+  }
 })
 export default class MovieList extends Vue {
-
+  wrapWidth: number = 2340
+  mounted() {
+    // 获取并设置包裹滑块容器的宽度
+    const wrap: HTMLElement = this.$refs.wrapRef as HTMLElement
+    try {
+      const width = wrap.querySelectorAll('.slide').length * 234
+      this.wrapWidth = width
+      wrap.style.width = width + 'px'
+    } catch(e) {
+      wrap.style.width = this.wrapWidth + 'px'
+    }
+  }
 }
 </script>
 
 <style scoped>
   .movie-list {
-    height: 342px;
+    /* height: 342px; */
+    max-width: 1200px;
   }
 
   .list-header {
+    box-sizing: border-box;
+    width: 100%;
     height: 44px;
+    padding: 0 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     background: linear-gradient(to right, rgb(250, 60, 104) 2%, rgb(254, 70, 77) 97%, rgb(250, 60, 104))
+  }
+  
+  .slide-container {
+    overflow: hidden;
+  }
+
+  .slide {
+    float: left;
+    margin: 10px;
+    margin-top: 3px;
   }
 </style>

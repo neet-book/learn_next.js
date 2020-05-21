@@ -32,6 +32,7 @@ export default class  extends Vue {
 
 <style scoped>
 .recommend {
+  /* margin-top: 30px; */
   max-width: 1200px;
   height: 800px;
 }
