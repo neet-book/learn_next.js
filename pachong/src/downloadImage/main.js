@@ -64,7 +64,7 @@ async function getMovieImage(db) {
       // 存储图片链接
       await db.updateOne(
         { _id },
-        { $set: { imgSrc: `http://locolhost:3000/image/movie/${filename}` }},
+        { $set: { imgSrc: `http://localhost:3000/image/movie/${filename}` }},
         true
       )
     }

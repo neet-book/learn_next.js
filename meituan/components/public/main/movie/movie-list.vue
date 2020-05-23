@@ -7,7 +7,11 @@
     </div>
     <div class="slide-container">
       <!-- 包裹所有电影滑块 -->
-      <div class="slide-wrap clear-fix" ref="wrapRef">
+      <div
+        class="slide-wrap clear-fix"
+        ref="wrapRef"
+        :style="{ transform: `translateX(-${distance}px)` }"
+      >
         <movie-slide
           class="slide"
           v-for="movie of movieList"
@@ -15,27 +19,34 @@
           :movie="movie"
         />
       </div>
-      <round-button />
-      <round-button />
+      <round-button class="btn-pre" @click="changePage(-1)" />
+      <round-button class="btn-next" @click="changePage(5)" direction="right" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Vue, Component, Inject} from 'nuxt-property-decorator'
 
 import RoundButton from '~/components/common/round-button.vue'
 import MovieSlide from './movie-slide.vue'
 @Component({
-  inject: ['movieList'],
   components: {
     RoundButton,
     MovieSlide
   }
 })
 export default class MovieList extends Vue {
-  wrapWidth: number = 2340
+  wrapWidth: number = 234 * 10
+  pageWidth: number = 234 * 5
+  currentPage: number = 0
+  maxPage: number = 0
+  distance: number = 0
+  @Inject('movieList') movieList: any[] | undefined
+  
   mounted() {
+    let len = (this.movieList as []).length
+    this.maxPage = len % 5 === 0 ? len / 5 - 1 : Number.parseInt(len / 5 + "")
     // 获取并设置包裹滑块容器的宽度
     const wrap: HTMLElement = this.$refs.wrapRef as HTMLElement
     try {
@@ -45,6 +56,26 @@ export default class MovieList extends Vue {
     } catch(e) {
       wrap.style.width = this.wrapWidth + 'px'
     }
+  }
+
+  changePage(n: number): void {
+    let page = this.currentPage + n
+    let max = this.maxPage
+  
+    if (page > this.maxPage) {
+      do {
+        page = max - page
+      } while ( 0 <= page && page <= max)
+    }
+
+    if (page < 0) {
+      do {
+        page = max + page
+      } while ( 0 <= page && page <= max)
+    }
+
+    this.currentPage = page
+    this.distance = this.pageWidth * page
   }
 }
 </script>
@@ -67,8 +98,22 @@ export default class MovieList extends Vue {
   
   .slide-container {
     overflow: hidden;
+    position: relative;
   }
 
+  .btn-pre {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%)
+  }
+
+  .btn-next {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%)
+  }
   .slide {
     float: left;
     margin: 10px;

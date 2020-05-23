@@ -25,5 +25,6 @@ export default class  extends Vue {
   border-radius: 50%;
   background: black;
   z-index: 100;
+  cursor: point;
 }
 </style>
