@@ -7,46 +7,107 @@ start().catch(e => console.log(e))
 async function start() {
   const dbUrl = ' mongodb://127.0.0.1:27017/'
   const db = await new Database(dbUrl).connect('meituan')
-  await getRecommentImage(db)
+  await getMovieImage(db)
 
   db.close()
 }
 
-async function getRecommentImage(db) {
-  const recommends = await db.coll('recommend').find()
-  const dir = path.resolve('../../image/recommend')
-  
-  for(const rec of recommends) {
-    const imgUrl = createImageUrl(rec.imgUrl)
-    const filename = parserFileName(rec.imgUrl)
-    // 获取图片
-    await downloadImage(dir, imgUrl, filename)
-    .then(() => {
-      // 检查是否成功下载
-      if (!re) return
-      // 存储图片链接
-      db.updateOne(
-        { _id: rec._id},
-        { $set: { imgSrc: `http://locolhose:3000/image/recommend/${filename}` }},
-        true
-      )
-    })
-    .catch(e => {
-      console.log('下载推荐图片失败: ', e.message)
-      return false
-    })
-  }
+
+async function getImage(filename, imgUrl, size, saveDir) {
+	// 构建下载地址
+	const downloadUrl = createDownloadUrl(imgUrl, size)
+	// 构建保存地址
+	const dir = path.resolve(`../../${saveDir}`)
+	// 下载图片
+	return await downloadImage(dir, downloadUrl, filename)
 }
 
-function createImageUrl(url) {
+
+async function getMinsuImage(db) {
+  // 切换集合获取数据
+  const citys = await db.coll('minsu').find()
+  let success = 0
+  let failed = 0
+  for(const { minsu, cityId } of citys) {
+  	let index = 0
+    for (const ms of minsu) {
+    	const res = await getImage(ms.coverImage, '', `image/minsu/${cityId}`)
+    	if (res) {
+        const filename = parserFileName(ms.coverImage)
+    		await db.updateOne(
+  				{ cityId: cityId },
+  				{ $set: { [`minsu.${index}.imgSrc`]: `http://locolhose:3000/image/minsu/${cityId}/${filename}` }},
+  				true
+				)
+    	}
+    	res ? success++ : failed++
+    	index++
+  	}
+  }
+
+  console.log(`获取民宿图片完成： 成功${success}, 失败${failed}`)
+}
+
+
+async function getMovieImage(db) {
+  // 切换集合获取数据
+  const movies = await db.coll('movies').find()
+  // 保存地址
+  let success = 0, failed = 0
+  for(const { _id, img } of movies) {
+    // const imgUrl = createImageUrl(rec.img)
+    const filename = parserFileName(img)
+    // 获取图片
+    const re = await getImage(filename, `http://localhost:3000/movie/${filename}`, '@214w_297h_1e_1c', 'image/movie')
+     
+    if (re) {
+      // 存储图片链接
+      await db.updateOne(
+        { _id },
+        { $set: { imgSrc: `http://localhost:3000/image/movie/${filename}` }},
+        true
+      )
+    }
+
+    re ? success++ : failed++
+  }
+  console.log(`获取电影图片完成： 成功${success}，失败${failed}`)
+}
+
+async function getRecommentImage(db) {
+  // 切换集合获取数据
+  const recommends = await db.coll('recommend').find()
+  let success = 0, failed = 0
+
+  for (const { _id, imgUrl } of recommends) {
+    // 获取文件名
+    const filename = parserFileName(imgUrl)
+    // const re = await getImage(filename, imgUrl, '@214w_120h_1e_1c', '../../image/recommend', db)
+
+    if (true) {
+      await db.updateOne({ _id }, { $set: { imgSrc: `http://localhost:3000/image/recommend/${filename}` }})
+    }
+
+    // re ? success++ : failed++
+  }
+  
+  console.log(`获取推荐图片完成: 成功${success}，失败${failed}`)
+}
+
+function createDownloadUrl(url, size) {
   const pathname = new URL(url).pathname
   const rule = /[^(\/w\.h\/)]/
   const index = pathname.search(rule)
   // console.log(arr)
-  return `https://p0.meituan.net/${ index > -1 ? pathname.slice(index) : pathname }@250w_150h_1e_1c`
+  return `https://p0.meituan.net/${ index > -1 ? pathname.slice(index) : pathname }${size}`
 }
 
 function parserFileName(url) {
   let pathname = new URL(url).pathname
   return path.posix.basename(pathname)
+}
+
+async function updateRecommendDate(db) {
+  const recommends = db.coll('recommend').find()
+
 }

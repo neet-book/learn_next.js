@@ -2,6 +2,7 @@
   <div class="category">
     <h3 class="category-title">全部分类</h3>
     <div class="category-container" @mouseleave="currentCat = false">
+      <!-- 分类列表 -->
       <ul>
         <li class="category-li"
           v-for="category of categorys"
@@ -43,7 +44,6 @@ import CategoryNavDetail from './category-nav-detail.vue'
 })
 export default class CategoryNav extends Vue {
   currentCat: number | boolean = false
-  categorys: undefined
 }
 </script>
 

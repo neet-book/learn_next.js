@@ -1,5 +1,4 @@
-const Router = require('koa-router')
-const router = new Router()
+const router = require('./index.js')
 
 async function getRecommend() {
   const db = await require('../db/index.js')

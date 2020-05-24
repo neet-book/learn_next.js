@@ -26,11 +26,23 @@
 </template>
 
 <script lang="ts">
+export interface Detail {
+  text: string
+  href: string
+  index: string | number
+}
+export interface DetailCate {
+  title: string
+  cat_id: number
+  index: string | number
+  details: Detail[]
+}
+
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 @Component
 export default class CategoryNavDetail extends Vue {
-  @Prop(Array) detailCats: any[] | undefined
+  @Prop(Array) detailCats: DetailCate[] | undefined
 }
 </script>
 

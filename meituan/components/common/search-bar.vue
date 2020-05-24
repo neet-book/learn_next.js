@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { throttle } from '~/static/script/util'
+import { throttle } from '~/assets/script/util'
 interface Suggest {
   id: string | number
   text: string

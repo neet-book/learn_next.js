@@ -1,5 +1,5 @@
-const Router = require('koa-router')
-const router = new Router()
+const router = require('./index.js')
+
 
 async function getCategory() {
   const database = await require('../db/index.js')

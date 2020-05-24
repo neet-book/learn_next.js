@@ -8,7 +8,7 @@
         <h3>{{ item.title }}</h3>
         <div class="score">
           <!-- 评价星数 -->
-          <rate-star class="rate-star-box" :max="5" :score="item.score" />
+          <rate-star class="rate-star-box" :max="5" :score="parseFloat(item.score)" />
             <!-- 评论数 -->
           <div class="comment-line">{{ item.commentNum }}个评价</div>
           <div class="area-line">{{ item.areaName }}</div>
@@ -22,14 +22,14 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import RateStar from './rate-star.vue'
-interface Recommend {
+
+export interface Recommend {
   itemId: number
   title: string
   imgSrc: string
   // 商店链接
   detailUrl: string
   lowPrice: number
-  // 评论数
   commentNumber: number
   // 人均价格
   avgPrice: number
@@ -39,6 +39,7 @@ interface Recommend {
   areaName: string
   [key: string]: number | string
 }
+
 @Component({
   components: {
     RateStar
