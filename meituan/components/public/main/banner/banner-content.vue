@@ -180,5 +180,9 @@ export default class BannerContent extends Vue {
   .banner-item-second:nth-child(3), .banner-item-first {
     display: none;
   }
+
+  .banner-swiper {
+    width: 470px;
+  }
 }
 </style>

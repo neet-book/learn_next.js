@@ -20,7 +20,7 @@
         />
       </div>
       <round-button class="btn-pre" @click="changePage(-1)" />
-      <round-button class="btn-next" @click="changePage(5)" direction="right" />
+      <round-button class="btn-next" @click="changePage(1)" direction="right" />
     </div>
   </div>
 </template>
@@ -61,17 +61,19 @@ export default class MovieList extends Vue {
   changePage(n: number): void {
     let page = this.currentPage + n
     let max = this.maxPage
-  
-    if (page > this.maxPage) {
+    let i = 0
+
+    if (page > max) {
       do {
-        page = max - page
-      } while ( 0 <= page && page <= max)
+        page = page - max - 1
+      } while (page > max)
     }
 
     if (page < 0) {
       do {
-        page = max + page
-      } while ( 0 <= page && page <= max)
+        console.log(page)
+        page = max + page + 1
+      } while (page < 0)
     }
 
     this.currentPage = page
@@ -82,7 +84,7 @@ export default class MovieList extends Vue {
 
 <style scoped>
   .movie-list {
-    /* height: 342px; */
+    height: 354px;
     max-width: 1200px;
   }
 

@@ -89,7 +89,7 @@ export default class Index extends Vue {
 <style scoped>
 .container {
   max-width: 1200px;
-  min-width: 1030px;
+  min-width: 950px;
   margin: 0 auto;
 }
 
