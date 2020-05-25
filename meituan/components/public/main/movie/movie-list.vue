@@ -1,9 +1,12 @@
 <template>
   <div class="movie-list">
-    <div class="list-header">
-      <span>电影</span>
-      <span>即将上映</span>
-      <a href="https://maoyan.com/?utm_source=meituanweb">全部<i class="el-icon-arrow-right"></i></a>
+    <div class="list-header clear-fix">
+      <span class="main-title">电影</span>
+      <span class="subtitle">即将上映</span>
+      <a
+        href="https://maoyan.com/?utm_source=meituanweb"
+        class="btn-more btn-more-positoin"
+      >全部<i class="el-icon-arrow-right"></i></a>
     </div>
     <div class="slide-container">
       <!-- 包裹所有电影滑块 -->
@@ -93,6 +96,7 @@ export default class MovieList extends Vue {
     width: 100%;
     height: 44px;
     padding: 0 20px;
+    color: #fff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background: linear-gradient(to right, rgb(250, 60, 104) 2%, rgb(254, 70, 77) 97%, rgb(250, 60, 104))
@@ -103,6 +107,35 @@ export default class MovieList extends Vue {
     position: relative;
   }
 
+/* 标题 */
+  .list-header span {
+    display: inline-block;
+    color: #fff;
+    height: 44px;
+    line-height: 44px;
+  }
+  .main-title {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    position: relative;
+  }
+
+  .subtitle::after {
+    content: "";
+    display: block;
+    width: 2px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 7px solid white;
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+  }
+/* 按钮 */
   .btn-pre {
     position: absolute;
     top: 50%;
@@ -116,9 +149,22 @@ export default class MovieList extends Vue {
     right: 20px;
     transform: translateY(-50%)
   }
+
+  .btn-more {
+    line-height: 44px;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    float: right;
+  }
   .slide {
     float: left;
     margin: 10px;
     margin-top: 3px;
+  }
+
+  .btn-more-positoin {
+    position: relative;
+    
   }
 </style>

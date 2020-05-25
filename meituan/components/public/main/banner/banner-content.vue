@@ -3,12 +3,12 @@
     <!-- 第一行banner -->
     <div class="banner-row clear-fix">
       <swiper :items="swiperItems" class="banner-swiper" />
-        <a 
-          class="baner-item banner-item-first"
-          :href="bannerItem[0].href" 
-          :style="{ backgroundImage: `url(${bannerItem[0].img})` }"
-        >
-        </a>
+      <a 
+        class="baner-item banner-item-first"
+        :href="bannerItem[0].href" 
+        :style="{ backgroundImage: `url(${bannerItem[0].img})` }"
+      >
+      </a>
       <loging class="banner-loging" />
     </div>
     <!-- 第二行banner -->

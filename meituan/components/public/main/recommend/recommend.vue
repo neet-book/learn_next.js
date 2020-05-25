@@ -1,7 +1,7 @@
 <template>
   <div class="recommend">
     <div class="recommend-header">
-      <span>推荐</span><span>为你甄选最适合的</span>
+      <span class="main-title">推荐</span><span class="subtitle">为你甄选最适合的</span>
     </div>
     <div class="recommend-content">
       <recommend-card
@@ -56,17 +56,17 @@ export default class  extends Vue {
   line-height: 44px;
 }
 
-.recommend-header span:nth-child(1) {
+.main-title {
   font-size: 18px;
   margin-right: 10px;
 }
 
-.recommend-header span:nth-child(2) {
+.subtitle {
   font-size: 13px;
   position: relative;
 }
 
-.recommend-header span:nth-child(2)::after {
+.subtitle::after {
   content: "";
   display: block;
   width: 2px;
