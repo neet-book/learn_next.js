@@ -1,19 +1,19 @@
 <template>
   <div class="swiper">
     <div class="swiper-conteier" ref="conRef">
-      <a
+      <div
         v-for="(i, index) of items"
         :key="i.id"
-        :href="i.href"
-        target="_blank"
         :class="{
           current: currentIndex === index,
           next: nextIndex === index
         }"
+        :style="{ backgroundImage: `url(${i.src})` }"
         class="swiper-item"
       >
-        <img :src="i.src" :alt="i.dis">
-      </a>
+        <a :href="i.href" target="_blank">
+        </a>
+      </div>
       <!-- 按钮 -->
       <round-button direction="left" class="btn-pre" @click="toPre" />
       <round-button direction="right" class="btn-next" @click="toNext" />
@@ -131,6 +131,7 @@ export default class Swiper extends Vue {
   position: relative;
 }
 
+/* 按钮 */
 .btn-pre {
   position: absolute;
   top: 50%;
@@ -142,14 +143,20 @@ export default class Swiper extends Vue {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 10px
+  right: 10px;
 }
 
+/* 轮播图容器 */
 .swiper-container {
   position: relative;
 }
 
 .swiper-item {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeatl;
+  background-position: 50%;
+  background-size: cover;
   position: absolute;
   opacity: 0;
   transition: opacity 0.8s;
@@ -165,8 +172,7 @@ export default class Swiper extends Vue {
 }
 
 .swiper-item img{
-  width: 100%;
-  height: 100%;
+  position: relative
 }
 
 .swiper-indicator {

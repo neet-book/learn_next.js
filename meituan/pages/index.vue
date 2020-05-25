@@ -13,8 +13,10 @@
     </div>
     <!-- 电影推荐区域 -->
     <movie-list />
+    <!-- 民宿区域 -->
+    <minsu />
     <!-- 推荐区域 -->
-    <recommend />
+    <recommend class="recommend" />
   </div>
 </template>
 
@@ -32,14 +34,15 @@ import CategoryNav from '~/components/public/main/category/category-nav.vue'
 import BannerContent from '~/components/public/main/banner/banner-content.vue'
 import Recommend from '~/components/public/main/recommend/recommend.vue'
 import MovieList from '~/components/public/main/movie/movie-list.vue'
-
+import Minsu from '~/components/public/main/minsu/minsu.vue'
 @Component({
   components: {
     CategoryNav,
     BannerNavBar,
     BannerContent,
     Recommend,
-    MovieList
+    MovieList,
+    Minsu
   },
   // 通过provied为子组件提供数据
   provide() {
@@ -89,7 +92,7 @@ export default class Index extends Vue {
 <style scoped>
 .container {
   max-width: 1200px;
-  min-width: 1030px;
+  min-width: 950px;
   margin: 0 auto;
 }
 
@@ -109,5 +112,9 @@ export default class Index extends Vue {
   top: -50px;
   left: 20px;
   position: absolute;
+}
+
+.recommend {
+  margin-top: 40px;
 }
 </style>
