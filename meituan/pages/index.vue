@@ -14,7 +14,7 @@
     <!-- 电影推荐区域 -->
     <movie-list />
     <!-- 民宿区域 -->
-    <minshu />
+    <minsu />
     <!-- 推荐区域 -->
     <recommend class="recommend" />
   </div>

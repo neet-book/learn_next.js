@@ -5,7 +5,7 @@
         <slot name="maintitle"></slot>
       </span>
       <span class="sub-title">
-        <slot name="subTitle"></slot>
+        <slot name="subtitle"></slot>
       </span>
     </div>
     <div class="box-container">
@@ -13,7 +13,6 @@
     </div>
   </div>
 </template>
-
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
@@ -23,7 +22,6 @@ export default class ShowBox extends Vue {
 
 }
 </script>
-
 
 <style scoped>
 .box-header {
