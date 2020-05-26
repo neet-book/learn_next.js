@@ -6,8 +6,12 @@
       </template>
       <template v-slot:subtitle>
         <div class="cities">
-          <ul>
-            <li></li>
+          <ul class="clear-fix">
+            <li
+              v-for="city of cities"
+              :key="city._id"
+              class="city"
+            >{{ city.cityName }}</li>
           </ul>
         </div>
       </template>
@@ -19,7 +23,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+export interface City {
+  _id: string
+  cityId: number
+  cityName: string
+}
+
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import ShowBox from '~/components/common/show-box.vue'
 @Component({
   components: {
@@ -27,10 +37,17 @@ import ShowBox from '~/components/common/show-box.vue'
   }
 })
 export default class Minsu extends Vue {
-
+  @Prop({ type: Array, default: () => [] })
+  cities: City[] | undefined
 }
 </script>
 
 <style scoped>
+.city {
+  float: left;
+}
 
+.city > ul {
+  display: inline-block;
+}
 </style>

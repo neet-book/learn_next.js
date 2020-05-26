@@ -14,7 +14,7 @@
     <!-- 电影推荐区域 -->
     <movie-list />
     <!-- 民宿区域 -->
-    <minsu />
+    <minsu :cities="cityList" />
     <!-- 推荐区域 -->
     <recommend class="recommend" />
   </div>
@@ -26,7 +26,8 @@ import {
   getCategory,
   getDetails,
   getRecommend,
-  getMovieList
+  getMovieList,
+  getCityList,
 } from '~/assets/script/network/index'
 
 import BannerNavBar from '~/components/public/main/banner/banner-nav-bar.vue'
@@ -58,6 +59,7 @@ export default class Index extends Vue {
   detailCategorys: any[] | undefined
   categorys: any[] | undefined
   recommends: Recommend[] | undefined
+  cities: any[] | undefined
   // 获取数据
   async asyncData () {
     let detailCategorys: any = await getDetails().catch(e => {
@@ -79,11 +81,18 @@ export default class Index extends Vue {
       console.log(e.message)
       return []
     })
+
+    let cityList: any[] = await getCityList().catch(e => {
+      console.log(e.message)
+      return []
+    })
+
     return {
       categorys,
       detailCategorys,
       recommends,
-      movieList
+      movieList,
+      cityList
     }
   }
 }
