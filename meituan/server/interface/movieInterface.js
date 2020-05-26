@@ -15,7 +15,7 @@ const promise = getDate('movies')
   return false
 })
 
-router.get('/movie', async (ctx) => {
+module.exports = async (ctx) => {
   const data = await promise
   data === false ?
   ctx.body = {
@@ -28,6 +28,4 @@ router.get('/movie', async (ctx) => {
     message: 'movie list数据获取成功',
     data
   }
-})
-
-module.exports = router
+}

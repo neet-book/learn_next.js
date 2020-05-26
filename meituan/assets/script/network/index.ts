@@ -38,4 +38,22 @@ export async function getMovieList() {
   }
 
   return data
-} 
+}
+
+export async function getCityList() {
+  const { data: { state, message, data } } = await instance('/api/city')
+  if (state !== 200) {
+    console.log('getCityList Error: ', message)
+  }
+
+  return data
+}
+
+export async function getMinsu(cityId: number | string) {
+  const { data: { state, message, data } } = await instance('/api/minsu/' + cityId)
+  if (state !== 200) {
+    console.log('getCityList Error: ', message)
+  }
+
+  return data
+}

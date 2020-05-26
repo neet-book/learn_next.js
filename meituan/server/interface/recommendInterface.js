@@ -15,7 +15,8 @@ const recommendPro = getRecommend()
   return false
 })
 
-router.get('/recommend', async (ctx) => {
+
+module.exports = async (ctx) => {
   const data = await recommendPro
 
   data === false ?
@@ -29,6 +30,4 @@ router.get('/recommend', async (ctx) => {
     message: 'recommend数据获取成功',
     data
   }
-})
-
-module.exports = router
+}

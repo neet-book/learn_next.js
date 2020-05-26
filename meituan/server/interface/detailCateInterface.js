@@ -1,10 +1,8 @@
-const router = require('./index.js')
-
 async function getDetail() {
-  const database = await require('../db/index.js')
+  const datebase = await require('../db/index.js')
   //获取数据库数据
-  database.coll('detail')
-  const detailArr = await database.find()
+  datebase.coll('detail')
+  const detailArr = await datebase.find()
 
   // 整理数据
   const totla = []
@@ -34,7 +32,7 @@ getDetail()
   console.log('detail获取失败 -> ', err)
 })
 
-router.get('/detail', async ctx => {
+module.exports = async ctx => {
   details === false ?
   ctx.body = {
     state: 202,
@@ -46,6 +44,4 @@ router.get('/detail', async ctx => {
     message: 'detail数据获取成功',
     data: details
   }
-})
-
-module.exports = router
+}

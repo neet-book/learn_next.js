@@ -1,12 +1,17 @@
 <template>
   <div class="show-box">
-    <div class="box-hearder">
-      <span class="main-title">
+    <div class="box-header clear-fix">
+      <div class="title main-title">
         <slot name="maintitle"></slot>
-      </span>
-      <span class="sub-title">
+      </div>
+      <div class="title sub-title">
         <slot name="subtitle"></slot>
-      </span>
+      </div>
+      <div class="title right-title">
+        <slot name="righttitle">
+      
+        </slot>
+      </div>
     </div>
     <div class="box-container">
       <slot name="container"></slot>
@@ -35,4 +40,35 @@ export default class ShowBox extends Vue {
   rgb(66, 191, 205) 97%), 
   rgb(88, 174, 221);
 }
+
+.title {
+  display: inline-block;
+  color: #fff;
+  /* height: 44px; */
+  line-height: 44px;
+}
+
+.main-title {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.sub-title {
+  font-size: 13px;
+  position: relative;
+}
+
+.right-title {
+  line-height: 44px;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  float: right;
+
+}
+.box-container {
+  padding: 10px;
+}
+
+
 </style>
