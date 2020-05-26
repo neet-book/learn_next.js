@@ -1,14 +1,15 @@
 const Koa = require('koa')
+const bodyParser = require('koa-bodyparser')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
 // 接口
-const DetailCateInterface = require('./interface/detailCateInterface.js')
-const CategoryInterface = require('./interface/categoryInterface.js')
-const RecommendInterface = require('./interface/recommendInterface.js')
-const MovieInterface = require('./interface/movieInterface.js')
+const api = require('./interface/index.js')
+
 
 const app = new Koa()
+
+app.use(bodyParser())
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
@@ -30,16 +31,9 @@ async function start () {
     await builder.build()
   }
 
+ 
   // 接口
-
-  // 分类接口
-  app.use(CategoryInterface.routes()).use(CategoryInterface.allowedMethods())
-  // 详细分类接口
-  app.use(DetailCateInterface.routes()).use(DetailCateInterface.allowedMethods())
-  // 推荐接口
-  app.use(RecommendInterface.routes()).use(RecommendInterface.allowedMethods())
-  // 电影接口
-  app.use(MovieInterface.routes()).use(MovieInterface.allowedMethods())
+  app.use(api.routes()).use(api.allowedMethods())
 
   app.use((ctx) => {
     ctx.status = 200

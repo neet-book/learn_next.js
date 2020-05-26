@@ -5,27 +5,32 @@ async function getMinsu() {
   return await db.coll('minsu').find()
 }
 
-const minsu = []
+const minsu = {}
 
 getMinsu()
 .then(data => {
-  minsu = data
+  for (let ms of data) {
+    minsu[ms.cityId] = ms
+  }
 })
 .catch(e => {
   console.log(`minsu获取失败${e.message}`)
   minsu = false
 })
 
-router.get('/minsu', async ctx => {
-  minsu === false ?
-  ctx.body = {
-    state: 202,
-    message: 'minsu数据获取失败',
-    data: []
-  } :
-  ctx.body = {
-    state: 200,
-    message: 'minsu数据获取成功',
-    data: minsu
+module.exports = async ctx => {
+  let id = ctx.params.city
+  if ( minsu === false || minsu[id] === undefined) {
+    ctx.body = {
+      state: 202,
+      message: minsu[id] === undefined ? 'cityID 错误' : 'minsu数据获取成功',
+      data: {}
+    } 
+  } else {
+    ctx.body = {
+      state: 200,
+      message: 'minsu数据获取成功',
+      data: minsu[id]
+    }
   }
-}) 
+}

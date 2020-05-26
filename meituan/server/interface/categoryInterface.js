@@ -35,7 +35,8 @@ getCategory()
   console.log('category获取失败 -> ', err)
 })
 
-router.get('/category', async ctx => {
+
+module.exports = async ctx => {
   categorys === false ?
   ctx.body = {
     state: 202,
@@ -47,6 +48,4 @@ router.get('/category', async ctx => {
     message: 'category数据获取成功',
     data: categorys
   }
-})
-
-module.exports = router
+}
