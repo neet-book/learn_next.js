@@ -6,8 +6,13 @@
       </template>
       <template v-slot:subtitle>
         <div class="cities">
-          
+          <ul>
+            <li></li>
+          </ul>
         </div>
+      </template>
+      <template v-slot:righttitle>
+        quanbu
       </template>
     </show-box>
   </div>

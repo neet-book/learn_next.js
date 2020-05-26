@@ -2,12 +2,14 @@ const MongoClient = require('mongodb').MongoClient
 
 const url = 'mongodb://127.0.0.1:27017'
 
-class Database {
+class Datebase {
   constructor (url) {
+    if (Datebase.instance !== null) return Datebase.instance
     this.url = url
     this.db = null
     this.collection = null
     this.client = null
+    Datebase.instance = this
   }
 
   // 连接数据库
@@ -94,8 +96,8 @@ class Database {
       })
 
       this.client = client
-      if (database) this.db = client.db(database)
-      if (collecton) this.collection = client.db(database).collection(collection)
+      if (datebase) this.db = client.db(datebase)
+      if (collecton) this.collection = client.db(datebase).collection(collection)
       return client
     })
 
@@ -109,7 +111,8 @@ class Database {
     console.log('已关闭与数据库的链接')
   }
 }
+Datebase.instance = null
 
-const database = new Database(url).connect('meituan').catch(i => i)
+const datebase = new Datebase(url).connect('meituan').catch(i => i)
 
-module.exports  = database
+module.exports  = datebase

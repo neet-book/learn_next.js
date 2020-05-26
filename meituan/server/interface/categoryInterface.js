@@ -1,11 +1,10 @@
 const router = require('./index.js')
 
-
 async function getCategory() {
-  const database = await require('../db/index.js')
+  const datebase = await require('../db/index.js')
   //获取数据库数据
-  database.coll('category')
-  const categoryArr = await database.find()
+  datebase.coll('category')
+  const categoryArr = await datebase.find()
 
   // 整理数据
   const store = []
