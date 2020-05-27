@@ -1,20 +1,13 @@
 <template>
-  <div class="show-box">
-    <div class="box-header clear-fix">
-      <div class="title main-title">
-        <slot name="maintitle"></slot>
-      </div>
-      <div class="title sub-title">
-        <slot name="subtitle"></slot>
-      </div>
-      <div class="title right-title">
-        <slot name="righttitle">
-      
-        </slot>
-      </div>
+  <div class="box-header clear-fix">
+    <div class="title main-title">
+      <slot name="maintitle"></slot>
     </div>
-    <div class="box-container">
-      <slot name="container"></slot>
+    <div class="title sub-title">
+      <slot name="subtitle"></slot>
+    </div>
+    <div class="title right-title">
+      <slot name="righttitle"></slot>
     </div>
   </div>
 </template>
@@ -23,7 +16,7 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component
-export default class ShowBox extends Vue {
+export default class BoxHeader extends Vue {
 
 }
 </script>
@@ -42,10 +35,10 @@ export default class ShowBox extends Vue {
 }
 
 .title {
-  display: inline-block;
   color: #fff;
-  /* height: 44px; */
+  float: left;
   line-height: 44px;
+  padding-bottom: 0;
 }
 
 .main-title {
@@ -59,7 +52,6 @@ export default class ShowBox extends Vue {
 }
 
 .right-title {
-  line-height: 44px;
   font-size: 14px;
   color: #fff;
   text-decoration: none;

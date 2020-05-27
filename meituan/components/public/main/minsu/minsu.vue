@@ -1,8 +1,8 @@
 <template>
   <div class="minshu">
-    <show-box>
+    <box-header class="header">
       <template v-slot:maintitle>
-        民宿
+        城市
       </template>
       <template v-slot:subtitle>
         <div class="cities">
@@ -10,7 +10,7 @@
             <li
               v-for="city of cities"
               :key="city._id"
-              class="city"
+              class="city current"
             >{{ city.cityName }}</li>
           </ul>
         </div>
@@ -18,7 +18,7 @@
       <template v-slot:righttitle>
         quanbu
       </template>
-    </show-box>
+    </box-header>
   </div>
 </template>
 
@@ -30,10 +30,10 @@ export interface City {
 }
 
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import ShowBox from '~/components/common/show-box.vue'
+import BoxHeader from '~/components/common/box-header.vue'
 @Component({
   components: {
-    ShowBox
+    BoxHeader
   }
 })
 export default class Minsu extends Vue {
@@ -45,9 +45,30 @@ export default class Minsu extends Vue {
 <style scoped>
 .city {
   float: left;
+  padding: 0 5px;
+  line-height: 44px;
+  position: relative;
 }
 
-.city > ul {
-  display: inline-block;
+.current::after {
+  content: "";
+  display: block;
+  width: 2px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid white;
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translateX(50%)
+}
+
+.header {
+  background-color: linear-gradient(
+    to right,
+    rgb(243, 182, 74) 2%,
+    rgb(242, 197, 69) 97%)
+    rgb(243, 182, 74
+  );
 }
 </style>
