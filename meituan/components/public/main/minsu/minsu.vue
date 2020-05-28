@@ -6,19 +6,29 @@
       </template>
       <template v-slot:subtitle>
         <div class="cities">
+          <!-- 所有城市 -->
           <ul class="clear-fix">
             <li
               v-for="city of cities"
-              :key="city._id"
-              class="city current"
+              :key="city.cityId"
+              :class="{ current: city.cityId === current }"
+              @click="currentCity = city.cityId"
+              class="city"
             >{{ city.cityName }}</li>
           </ul>
         </div>
       </template>
       <template v-slot:righttitle>
-        quanbu
+        全部<i class="el-icon-allow-right"></i>
       </template>
     </box-header>
+    <!-- 民宿 -->
+    <div class="minsu-content">
+      <!-- <minsu-card
+        v-for="ms = minsu"
+        :key="ms.productId"
+      /> -->
+    </div>
   </div>
 </template>
 
@@ -30,15 +40,23 @@ export interface City {
 }
 
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
+
 import BoxHeader from '~/components/common/box-header.vue'
+import MinsuCard from './minsu-card.vue'
 @Component({
   components: {
-    BoxHeader
+    BoxHeader,
+    MinsuCard
   }
 })
 export default class Minsu extends Vue {
   @Prop({ type: Array, default: () => [] })
-  cities: City[] | undefined
+  cities: City[] = []
+  currunt: number | undefined = this.cities[0].cityId
+  
+  // get minsu() {
+
+  // }
 }
 </script>
 
@@ -64,10 +82,10 @@ export default class Minsu extends Vue {
 }
 
 .header {
-  background-color: linear-gradient(
+  background: linear-gradient(
     to right,
     rgb(243, 182, 74) 2%,
-    rgb(242, 197, 69) 97%)
+    rgb(242, 197, 69) 97%),
     rgb(243, 182, 74
   );
 }
