@@ -1,5 +1,32 @@
-import Vue from 'vue'
 import axios from 'axios'
+import { Plugin } from '@nuxt/types'
+
+interface Network {
+  getDetails: () => Promise<any>
+  getCategory: () => Promise<any>
+  getRecommend: () => Promise<any>
+  getMovieList: () => Promise<any>
+  getCityList: () => Promise<any>
+  getMinsu: (cityId: number | string) => Promise<any>
+}
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $net: Network
+  }
+}
+
+declare module '@nuxt/types' {
+  interface NuxtAppOptions {
+    $net: Network
+  }
+}
+
+declare module 'vuex/types/index' {
+  interface Store<S> {
+    $net: Network
+  }
+}
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000'
@@ -50,7 +77,7 @@ async function getCityList() {
   return data
 }
 
-async function getMinsu(cityId: number | string) {
+async function getMinsu(cityId: string | number) {
   const { data: { state, message, data } } = await instance('/api/minsu/' + cityId)
   if (state !== 200) {
     console.log('getCityList Error: ', message)
@@ -59,11 +86,16 @@ async function getMinsu(cityId: number | string) {
   return data
 }
 
-Vue.prototype.$net = {
-  getDetails,
-  getCategory,
-  getRecommend,
-  getMovieList,
-  getCityList,
-  getMinsu
+const network: Plugin = ({ app }, inject) => {
+  inject('net', {
+    getDetails,
+    getCategory,
+    getRecommend,
+    getMovieList,
+    getCityList,
+    getMinsu
+  })
 }
+
+export default network
+

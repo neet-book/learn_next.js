@@ -12,7 +12,7 @@
               v-for="city of cities"
               :key="city.cityId"
               :class="{ current: city.cityId === current }"
-              @click="currentCity = city.cityId"
+              @click="changeCity(city.cityId)"
               class="city"
             >{{ city.cityName }}</li>
           </ul>
@@ -24,10 +24,11 @@
     </box-header>
     <!-- 民宿 -->
     <div class="minsu-content">
-      <!-- <minsu-card
-        v-for="ms = minsu"
+      <minsu-card
+        v-for="ms of minsu[current]"
         :key="ms.productId"
-      /> -->
+        :minsu="ms"
+      />
     </div>
   </div>
 </template>
@@ -38,7 +39,9 @@ export interface City {
   cityId: number
   cityName: string
 }
-
+interface MinsuList {
+  [cityId: number]: any
+}
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
 import BoxHeader from '~/components/common/box-header.vue'
@@ -47,16 +50,31 @@ import MinsuCard from './minsu-card.vue'
   components: {
     BoxHeader,
     MinsuCard
+  },
+  async mounted() {
+    const cityId = this.$props?.cities[0]?.cityId || 0
+    this.$data.minsu[cityId] = await this.$net.getMinsu(cityId)
+    this.$data.current = cityId
+    console.log(this.$data.minsu, cityId)
   }
 })
 export default class Minsu extends Vue {
   @Prop({ type: Array, default: () => [] })
-  cities: City[] = []
-  currunt: number | undefined = this.cities[0].cityId
-  
-  // get minsu() {
+  cities: City[] | undefined
+  current: number = 0
+  minsu: MinsuList = {}
 
-  // }
+  async changeCity(cityId:number): Promise<void> {
+    console.log(cityId)
+    const minsu: MinsuList = this.minsu
+    if (minsu[cityId] === undefined) {
+      minsu[cityId] = await this.$net.getMinsu(cityId)
+      this.current = cityId
+    } else {
+      this.current = cityId
+    }
+
+  }
 }
 </script>
 
@@ -66,6 +84,7 @@ export default class Minsu extends Vue {
   padding: 0 5px;
   line-height: 44px;
   position: relative;
+  cursor: pointer;
 }
 
 .current::after {

@@ -22,13 +22,6 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import {
-  getCategory,
-  getDetails,
-  getRecommend,
-  getMovieList,
-  getCityList,
-} from '~/assets/script/network/index'
 
 import BannerNavBar from '~/components/public/main/banner/banner-nav-bar.vue'
 import CategoryNav from '~/components/public/main/category/category-nav.vue'
@@ -38,6 +31,7 @@ import MovieList from '~/components/public/main/movie/movie-list.vue'
 import Minsu from '~/components/public/main/minsu/minsu.vue'
 @Component({
   components: {
+    // getDetails,
     CategoryNav,
     BannerNavBar,
     BannerContent,
@@ -51,7 +45,7 @@ import Minsu from '~/components/public/main/minsu/minsu.vue'
       categorys: this.$data.categorys,
       detailCategorys: this.$data.detailCategorys,
       recommends: this.$data.recommends,
-      movieList: this.$data.movieList
+      movieList: this.$data.movieList,
     }
   }
 })
@@ -60,39 +54,45 @@ export default class Index extends Vue {
   categorys: any[] | undefined
   recommends: Recommend[] | undefined
   cities: any[] | undefined
+  cityList: any[] = []
   // 获取数据
-  async asyncData () {
-    let detailCategorys: any = await getDetails().catch(e => {
-      console.log(e.message)
-      return []
-    })
+  async asyncData (ctx: any) {
+    const app = ctx.app
+    try {
+      let detailCategorys: any = await app.$net.getDetails().catch((e:any) => {
+        console.log(e.message)
+        return []
+      })
 
-    let categorys: any = await getCategory().catch(e => {
-      console.log(e.message)
-      return []
-    })
-    
-    let recommends: any = await getRecommend().catch(e => {
-      console.log(e.message)
-      return []
-    })
+      let categorys: any = await app.$net.getCategory().catch((e:any) => {
+        console.log(e.message)
+        return []
+      })
+      
+      let recommends: any = await app.$net.getRecommend().catch((e:any) => {
+        console.log(e.message)
+        return []
+      })
 
-    let movieList: any[] = await getMovieList().catch(e => {
-      console.log(e.message)
-      return []
-    })
+      let movieList: any[] = await app.$net.getMovieList().catch((e:any) => {
+        console.log(e.message)
+        return []
+      })
 
-    let cityList: any[] = await getCityList().catch(e => {
-      console.log(e.message)
-      return []
-    })
+      let cityList: any[] = await app.$net.getCityList().catch((e:any) => {
+        console.log(e.message)
+        return []
+      })
 
-    return {
-      categorys,
-      detailCategorys,
-      recommends,
-      movieList,
-      cityList
+      return {
+        categorys,
+        detailCategorys,
+        recommends,
+        movieList,
+        cityList
+      }
+    } catch(e) {
+
     }
   }
 }

@@ -10,7 +10,7 @@ const minsu = {}
 getMinsu()
 .then(data => {
   for (let ms of data) {
-    minsu[ms.cityId] = ms
+    minsu[ms.cityId] = ms.minsu
   }
 })
 .catch(e => {
