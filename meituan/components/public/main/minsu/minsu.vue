@@ -28,6 +28,7 @@
         v-for="ms of minsu[current]"
         :key="ms.productId"
         :minsu="ms"
+        class="card"
       />
     </div>
   </div>
@@ -73,7 +74,6 @@ export default class Minsu extends Vue {
     } else {
       this.current = cityId
     }
-
   }
 }
 </script>
@@ -85,6 +85,10 @@ export default class Minsu extends Vue {
   line-height: 44px;
   position: relative;
   cursor: pointer;
+}
+
+.card {
+  padding-bottom: 25px;
 }
 
 .current::after {
@@ -107,5 +111,12 @@ export default class Minsu extends Vue {
     rgb(242, 197, 69) 97%),
     rgb(243, 182, 74
   );
+}
+
+.minsu-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-top: 10px;
 }
 </style>

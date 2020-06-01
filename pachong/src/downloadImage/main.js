@@ -7,7 +7,7 @@ start().catch(e => console.log(e))
 async function start() {
   const dbUrl = ' mongodb://127.0.0.1:27017/'
   const db = await new Database(dbUrl).connect('meituan')
-  await getMovieImage(db)
+  await getMinsuImage(db)
 
   db.close()
 }
@@ -31,16 +31,16 @@ async function getMinsuImage(db) {
   for(const { minsu, cityId } of citys) {
   	let index = 0
     for (const ms of minsu) {
-    	const res = await getImage(ms.coverImage, '', `image/minsu/${cityId}`)
-    	if (res) {
+    	// const res = await getImage(ms.coverImage, '', `image/minsu/${cityId}`)
+    	if (true) {
         const filename = parserFileName(ms.coverImage)
     		await db.updateOne(
   				{ cityId: cityId },
-  				{ $set: { [`minsu.${index}.imgSrc`]: `http://locolhose:3000/image/minsu/${cityId}/${filename}` }},
+  				{ $set: { [`minsu.${index}.imgSrc`]: `/image/minsu/${cityId}/${filename}` }},
   				true
 				)
     	}
-    	res ? success++ : failed++
+    	true ? success++ : failed++
     	index++
   	}
   }
