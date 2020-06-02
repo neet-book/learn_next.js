@@ -51,6 +51,7 @@ export default class  extends Vue {
 .product-img {
   width: 100%;
   height: 100%;
+  border-radius: 4px;
 }
 
 .head-img {

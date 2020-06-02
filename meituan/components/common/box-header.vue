@@ -56,6 +56,7 @@ export default class BoxHeader extends Vue {
   color: #fff;
   text-decoration: none;
   float: right;
+  cursor: pointer;
 
 }
 .box-container {
