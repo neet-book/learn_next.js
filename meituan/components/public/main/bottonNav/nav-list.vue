@@ -3,7 +3,7 @@
     <dt>{{ title }}</dt>
     <div class="nav-item-container">
       <dd
-        v-for="i of listItems"
+        v-for="i of items"
         :key="i.c_id"
       >
         <nuxt-link :to="i.href" target="_blank">{{ i.text }}</nuxt-link>
