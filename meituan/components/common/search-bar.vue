@@ -3,14 +3,16 @@
     <input
       v-model="content"
       :placeholder="placeholder"
-      @focus="showSuggest = true"
-      @blur="showSuggest = false"
+      @focus="onFocus"
+      @blur="onBlur"
       @input="getSuggest"
       class="search-input"
     >
-    <button class="search-button" @click="submitSearch"><span class="el-icon-search"></span></button>
+    <button class="search-button" @click="submitSearch">
+      <i class="el-icon-search"></i>
+    </button>
     <!-- 搜索建议 -->
-    <div class="search-bar-suggest" v-show="showSuggest">
+    <div class="search-bar-suggest" v-show="isFocus">
       <!-- 搜索历史 -->
       <div class="search-history" v-show="showHistory">
         <h6>搜索历史</h6>
@@ -21,7 +23,7 @@
         </ul>
       </div>
       <!-- 搜索推荐 -->
-      <div class="search-suggest-content" v-show="!showHistory">
+      <div class="search-suggest-content" v-show="showSuggest">
         <ul class="search-result-list">
           <li v-for="sug of suggests" :key="sug.id" @click="choseSuggest(sug)">
             <nuxt-link :to="sug.link" target="_blank">{{ sug.text }}</nuxt-link>
@@ -44,8 +46,8 @@ interface Suggest {
 export default class SearchBar extends Vue {
   @Prop(String) placeholder: string | undefined
   content: any = ''
-  showSuggest: boolean = false;
-  suggests: Suggest[] = [{ id: 0, text: 'o', link: '#' }]
+  isFocus: boolean = false;
+  suggests: Suggest[] = [{ id: 0, text: 'o', link: '/api/city' }]
   history: Suggest[] = []
   // hook
   mounted() {
@@ -54,7 +56,13 @@ export default class SearchBar extends Vue {
   }
 
   // methods
+  onFocus() {
+    this.isFocus = true
+  }
 
+  onBlur() {
+    window.setTimeout(() => this.isFocus = false, 100)
+  }
   // 提交搜索内容
   submitSearch(): void {
     const serchContent: string = this.content
@@ -64,6 +72,7 @@ export default class SearchBar extends Vue {
     })
     this.saveHistory()
   }
+
   // 获得搜索推荐
   getSuggest =  throttle(function () {
 
@@ -89,7 +98,12 @@ export default class SearchBar extends Vue {
   }
   // computed
   get showHistory() {
-    return this.content === ''
+    console.log(this.content === '' && this.isFocus)
+    return this.content === '' && this.isFocus
+  }
+
+  get showSuggest() {
+    return this.content !== '' && this.isFocus
   }
 }
 </script>
