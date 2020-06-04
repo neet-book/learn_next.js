@@ -2,7 +2,7 @@ const router = require('./index.js')
 
 async function getCity() {
   const db = await require('../db/index.js')
-  return await db.coll('city').find()
+  return await db.coll('citys').find()
 }
 
 let cities = []

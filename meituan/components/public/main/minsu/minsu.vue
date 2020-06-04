@@ -12,7 +12,7 @@
               v-for="city of cities"
               :key="city.cityId"
               :class="{ current: city.cityId === current }"
-              @mousover="changeCity(city.cityId)"
+              @mouseover="changeCity(city.cityId)"
               class="city"
             >{{ city.cityName }}</li>
           </ul>

@@ -1,12 +1,9 @@
 <template>
-  <dl class="nav-list">
-    <dt>{{ title }}</dt>
+  <dl class="navigation-list">
+    <dt>标题</dt>
     <div class="nav-item-container">
-      <dd
-        v-for="i of items"
-        :key="i.c_id"
-      >
-        <nuxt-link :to="i.href" target="_blank">{{ i.text }}</nuxt-link>
+      <dd>
+        <nuxt-link>{{  }}</nuxt-link>
       </dd>
     </div>
   </dl>
@@ -22,9 +19,9 @@ export interface NavItem {
   text: string
 }
 @Component
-export default class NavList extends Vue {
+export default class NavigationList extends Vue {
   @Prop(String) title: string | undefined
-  @Prop(Array) items: NavItem[] | undefined
+  @Prop(Object) listItems: NavItem[] | undefined
 }
 </script>
 
