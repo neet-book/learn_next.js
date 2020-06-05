@@ -2,6 +2,7 @@
   <div class="banner-content">
     <!-- 第一行banner -->
     <div class="banner-row clear-fix">
+      <!-- 轮播图 -->
       <swiper :items="swiperItems" class="banner-swiper" />
       <a 
         class="baner-item banner-item-first"
@@ -9,6 +10,7 @@
         :style="{ backgroundImage: `url(${bannerItem[0].img})` }"
       >
       </a>
+      <!-- 登录 -->
       <loging class="banner-loging" />
     </div>
     <!-- 第二行banner -->
@@ -140,16 +142,18 @@ export default class BannerContent extends Vue {
 }
 
 /* 第二行banner项 */
+/* 第二行第二个 */
 .banner-item-second:nth-child(2) {
   margin: 10px 0 0 10px;
 }
-
+/* 第二行第三个 */
 .banner-item-second:nth-child(3) {
   width: 150px;
   margin: 10px 0 0 10px;
   background-size: 150px 165px;
 }
 
+/* 下载二维码 */
 .banner-download {
   float: left;
   margin-left: 10px;
@@ -177,6 +181,10 @@ export default class BannerContent extends Vue {
 }
 
 @media screen and (max-width: 1200px) {
+  .banner-item-second:nth-child(1), .banner-item-second:nth-child(2) {
+    width: 230px;
+  }
+  
   .banner-item-second:nth-child(3), .banner-item-first {
     display: none;
   }

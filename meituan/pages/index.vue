@@ -110,11 +110,11 @@ export default class Index extends Vue {
 </script>
 
 <style scoped>
-.container {
+/* .container {
   max-width: 1190px;
   min-width: 950px;
   margin: 0 auto;
-}
+} */
 
 .banner-left {
   float: left;
