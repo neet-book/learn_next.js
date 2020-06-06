@@ -22,11 +22,7 @@ import RecommendCard from './recommend-card.vue'
   },
   inject: ['recommends']
 })
-export default class  extends Vue {
-  recommendList = []
-  mounted() {
-    console.log(this.$data.recommends)
-  }
+export default class Recommend extends Vue {
 }
 </script>
 

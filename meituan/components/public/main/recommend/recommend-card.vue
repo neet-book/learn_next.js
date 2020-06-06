@@ -46,7 +46,7 @@ export interface Recommend {
   }
 })
 export default class RecommendCard extends Vue {
-  @Prop({ type: Object, default: () => {}})
+  @Prop({ type: Object, default: () => {} })
   item: Recommend | undefined
 }
 </script>
@@ -72,7 +72,7 @@ export default class RecommendCard extends Vue {
 }
 
 /* .rate-star-box {
-  
+
 } */
 
 .inof-box {
@@ -110,6 +110,6 @@ export default class RecommendCard extends Vue {
 }
 
 .price {
-  font-size: 22px; 
+  font-size: 22px;
 }
 </style>

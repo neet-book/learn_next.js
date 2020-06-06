@@ -15,6 +15,8 @@
 </template>
 
 <script lang="ts">
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
+
 export interface Minsu {
   productId: string | number
   title: string
@@ -22,16 +24,36 @@ export interface Minsu {
   locationArea: string
   [key: string]: number | string
 }
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
 @Component
-export default class  extends Vue {
+export default class MinsuCard extends Vue {
   @Prop({ type: Object, default: () => {} })
   minsu: Minsu | undefined
 }
 </script>
 
-
 <style scoped>
+.minsu-card a {
+  text-decoration: none;
+}
+.image-box {
+  height: 210px
+}
 
+.image-box img {
+  width: 100%;
+  height: 100%;
+}
+
+.info-box {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: black;
+}
+
+.title-line {
+
+}
 </style>

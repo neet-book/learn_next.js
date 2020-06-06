@@ -28,12 +28,18 @@
         v-for="ms of minsu[current]"
         :key="ms.productId"
         :minsu="ms"
+        class="minsu-item"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
+
+import MinsuCard from './minsu-card.vue'
+import BoxHeader from '~/components/common/box-header.vue'
+
 export interface City {
   _id: string
   cityId: number
@@ -42,10 +48,7 @@ export interface City {
 interface MinsuList {
   [cityId: number]: any
 }
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
-import BoxHeader from '~/components/common/box-header.vue'
-import MinsuCard from './minsu-card.vue'
 @Component({
   components: {
     BoxHeader,
@@ -61,7 +64,9 @@ import MinsuCard from './minsu-card.vue'
 export default class Minsu extends Vue {
   @Prop({ type: Array, default: () => [] })
   cities: City[] | undefined
+
   current: number = 0
+
   minsu: MinsuList = {}
 
   async changeCity(cityId:number): Promise<void> {
@@ -73,7 +78,6 @@ export default class Minsu extends Vue {
     } else {
       this.current = cityId
     }
-
   }
 }
 </script>
@@ -107,5 +111,15 @@ export default class Minsu extends Vue {
     rgb(242, 197, 69) 97%),
     rgb(243, 182, 74
   );
+}
+
+.minsu-item {
+  width: 335px;
+}
+
+@media and (max-width: 1200px) {
+.minsu-item {
+  width: 445px;
+}
 }
 </style>
