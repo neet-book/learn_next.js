@@ -33,32 +33,6 @@ export default class MinsuCard extends Vue {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-.minsu-card a {
-  text-decoration: none;
-}
-.image-box {
-  height: 210px
-}
-
-.image-box img {
-  width: 100%;
-  height: 100%;
-}
-
-.info-box {
-  width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  color: black;
-}
-
-.title-line {
-
-}
-</style>
-=======
 .minsu-card {
   display: inline-block;
   width: 370px;
