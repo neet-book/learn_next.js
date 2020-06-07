@@ -7,7 +7,7 @@ start().catch(e => console.log(e))
 async function start() {
   const dbUrl = ' mongodb://127.0.0.1:27017/'
   const db = await new Database(dbUrl).connect('meituan')
-  await getMovieImage(db)
+  await getMinsuImage(db)
 
   db.close()
 }

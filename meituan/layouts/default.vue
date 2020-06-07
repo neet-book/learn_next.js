@@ -2,7 +2,9 @@
   <div class="container">
     <common-header />
     <main>
-      <nuxt />
+      <div id="main-container">
+        <nuxt />
+      </div>
     </main>
     <footer>
     </footer>
@@ -25,7 +27,15 @@ export default class DefaultLayout extends Vue {
 </script>
 
 <style scoped>
-.container {
-  min-width: 660px;
+#main-container {
+  max-width: 1190px;
+  min-width: 950px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1190px){
+  #main-container {
+    width: 950px;
+  }
 }
 </style>

@@ -1,17 +1,16 @@
 <template>
   <div class="detail-container">
-    <div
+    <template
       class="detail-are"
       v-for="cat of detailCats"
-      :key="cat.index"
     >
       <!-- 头部 -->
-      <div class="detail-title-wrapper">
+      <div class="detail-title-wrapper" :key="cat.id">
         <span>{{ cat.title }}</span>
         <span>更多<i class="el-icon-arrow-right"></i></span>
       </div>
       <!-- 主体 -->
-      <div class="detail-content">
+      <div class="detail-content" :key="cat.id + 'content'">
         <a
           v-for="item of cat.details"
           :href="item.href"
@@ -21,7 +20,7 @@
           {{ item.text }}
         </a>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 

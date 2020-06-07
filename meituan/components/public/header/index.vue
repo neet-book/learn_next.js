@@ -38,24 +38,35 @@ export default class CommonHeader extends Vue {}
 .header-content {
   background: white;
   height: 157px;
-  position: relative;
 }
+
 .header-content-container {
   max-width: 1190px;
+  min-width: 950px;
   margin: auto;
+  position: relative;
 }
+
 .header-content-search {
   position: absolute;
   left: 50%;
   top: 28px;
   transform: translateX(-50%);
 }
+
 .logo {
   display: inline-block;
   padding-top: 28px;
 }
+
 .logo > img{
   width: 126px;
   height: 46px;
+}
+
+@media screen and (max-width: 1190px){
+  .header-content-container {
+    width: 950px;
+  }
 }
 </style>

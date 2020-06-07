@@ -7,7 +7,7 @@ const detail = require('./detailCateInterface.js')
 const minsu = require('./minsuInterface.js')
 const movie = require('./movieInterface.js')
 const recommend = require('./recommendInterface.js')
-
+const navList = require('./bottonNaviInterface')
 const router = new Router({
   prefix: '/api'
 })
@@ -18,5 +18,5 @@ router.get('/detail', detail)
 router.get('/minsu/:city', minsu)
 router.get('/movie', movie)
 router.get('/recommend', recommend)
-
+router.get('/botton', navList)
 module.exports = router

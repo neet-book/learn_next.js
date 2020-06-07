@@ -12,14 +12,14 @@
               v-for="city of cities"
               :key="city.cityId"
               :class="{ current: city.cityId === current }"
-              @click="changeCity(city.cityId)"
+              @mouseover="changeCity(city.cityId)"
               class="city"
             >{{ city.cityName }}</li>
           </ul>
         </div>
       </template>
       <template v-slot:righttitle>
-        全部<i class="el-icon-allow-right"></i>
+        全部<i class="el-icon-arrow-right"></i>
       </template>
     </box-header>
     <!-- 民宿 -->
@@ -28,7 +28,7 @@
         v-for="ms of minsu[current]"
         :key="ms.productId"
         :minsu="ms"
-        class="minsu-item"
+        class="card"
       />
     </div>
   </div>
@@ -83,12 +83,19 @@ export default class Minsu extends Vue {
 </script>
 
 <style scoped>
+.minshu {
+  margin-top: 40px;
+}
 .city {
   float: left;
   padding: 0 5px;
   line-height: 44px;
   position: relative;
   cursor: pointer;
+}
+
+.card {
+  padding: 11px 10px 25px;
 }
 
 .current::after {
@@ -113,13 +120,12 @@ export default class Minsu extends Vue {
   );
 }
 
-.minsu-item {
-  width: 335px;
-}
-
-@media and (max-width: 1200px) {
-.minsu-item {
-  width: 445px;
-}
+.minsu-content {
+  height: 645px;
+  overflow: hidden;
+  border: solid 1px #e5e5e5;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 9px;
 }
 </style>

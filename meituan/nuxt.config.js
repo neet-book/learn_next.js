@@ -31,7 +31,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/network.ts'
+    '@/plugins/network.ts',
+    '@/plugins/fm-items.ts'
   ],
   /*
   ** Nuxt.js dev-modules

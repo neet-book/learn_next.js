@@ -75,7 +75,9 @@ export default class Recommend extends Vue {
 }
 .recommend-content {
   box-sizing: border-box;
-  padding: 10px;
+  height: 760px;
+  overflow: hidden;
+  padding: 5px;
   background-color: white;
   border-left: 1px solid #e5e5e5;
   border-right: 1px solid #e5e5e5;

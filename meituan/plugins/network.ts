@@ -86,6 +86,15 @@ async function getMinsu(cityId: string | number) {
   return data
 }
 
+async function getBottonNav() {
+  const { data: { state, message, data } } = await instance('/api/botton')
+  if (state !== 200) {
+    console.log('getBottonNav Error: ', message)
+  }
+
+  return data
+}
+
 const network: Plugin = ({ app }, inject) => {
   inject('net', {
     getDetails,
@@ -93,7 +102,8 @@ const network: Plugin = ({ app }, inject) => {
     getRecommend,
     getMovieList,
     getCityList,
-    getMinsu
+    getMinsu,
+    getBottonNav
   })
 }
 
