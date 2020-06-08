@@ -5,12 +5,17 @@
       <span >已有账号?</span>
       <button>登录</button>
     </header>
-    <mian>
+    <main>
       <form>
         <!-- <label for="phone">手机号</label>
         <input type="text" name="phone"> -->
 
+<<<<<<< HEAD
         <fm-input label="手机号码" />
+=======
+        <fm-input label="手机号码" v-model="phoneNumber"/><br>
+        <div>{{ phoneNumber }}</div>
+>>>>>>> ebdbd1be82aa316804d02208f86595d3fe546f63
         <label for="verifycode">短信动态验证码</label>
         <input type="text" name='verifycode'>
         <button>获取短信验证码</button>
@@ -24,7 +29,7 @@
         <button>同意以下协议并注册</button>
       </form>
       <a href="#" class="protocol">用户服务协议</a><a href="#" class="protocol">用户隐私协议</a>
-    </mian>
+    </main>
   </div>
 </template>
 
@@ -34,8 +39,8 @@ import { Vue, Component } from 'nuxt-property-decorator'
 @Component({
   layout: 'blank'
 })
-export default class  extends Vue {
-
+export default class Register extends Vue {
+  phoneNumber: number | string = ''
 }
 </script>
 

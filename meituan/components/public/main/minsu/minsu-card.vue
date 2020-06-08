@@ -15,6 +15,8 @@
 </template>
 
 <script lang="ts">
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
+
 export interface Minsu {
   productId: string | number
   title: string
@@ -22,15 +24,13 @@ export interface Minsu {
   locationArea: string
   [key: string]: number | string
 }
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
 @Component
-export default class  extends Vue {
+export default class MinsuCard extends Vue {
   @Prop({ type: Object, default: () => {} })
   minsu: Minsu | undefined
 }
 </script>
-
 
 <style scoped>
 .minsu-card {

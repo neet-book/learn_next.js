@@ -35,6 +35,11 @@
 </template>
 
 <script lang="ts">
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
+
+import MinsuCard from './minsu-card.vue'
+import BoxHeader from '~/components/common/box-header.vue'
+
 export interface City {
   _id: string
   cityId: number
@@ -43,10 +48,7 @@ export interface City {
 interface MinsuList {
   [cityId: number]: any
 }
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
-import BoxHeader from '~/components/common/box-header.vue'
-import MinsuCard from './minsu-card.vue'
 @Component({
   components: {
     BoxHeader,
@@ -62,7 +64,9 @@ import MinsuCard from './minsu-card.vue'
 export default class Minsu extends Vue {
   @Prop({ type: Array, default: () => [] })
   cities: City[] | undefined
+
   current: number = 0
+
   minsu: MinsuList = {}
 
   async changeCity(cityId:number): Promise<void> {

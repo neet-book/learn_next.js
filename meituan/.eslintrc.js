@@ -10,7 +10,9 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'nuxt/no-cjs-in-config': 'off',
-    'html-self-closing': false
+    'nuxt/no-cjs-in-config': 0,
+    'html-self-closing': 0,
+    'space-before-function-paren': 0,
+    'arrow-parens': 0
   }
 }

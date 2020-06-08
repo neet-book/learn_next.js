@@ -58,18 +58,18 @@ async function getMovieImage(db) {
     // const imgUrl = createImageUrl(rec.img)
     const filename = parserFileName(img)
     // 获取图片
-    const re = await getImage(filename, `http://localhost:3000/movie/${filename}`, '@214w_297h_1e_1c', 'image/movie')
+    // const re = await getImage(filename, `http://localhost:3000/movie/${filename}`, '@214w_297h_1e_1c', 'image/movie')
      
-    if (re) {
+    if (true) {
       // 存储图片链接
       await db.updateOne(
         { _id },
-        { $set: { imgSrc: `http://localhost:3000/image/movie/${filename}` }},
+        { $set: { imgSrc: `/image/movie/${filename}` }},
         true
       )
     }
 
-    re ? success++ : failed++
+    true ? success++ : failed++
   }
   console.log(`获取电影图片完成： 成功${success}，失败${failed}`)
 }
