@@ -10,7 +10,7 @@
         <!-- <label for="phone">手机号</label>
         <input type="text" name="phone"> -->
 
-        <ef-input label="手机号码">
+        <fm-input label="手机号码" />
         <label for="verifycode">短信动态验证码</label>
         <input type="text" name='verifycode'>
         <button>获取短信验证码</button>
