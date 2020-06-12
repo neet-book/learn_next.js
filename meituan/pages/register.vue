@@ -10,12 +10,8 @@
         <!-- <label for="phone">手机号</label>
         <input type="text" name="phone"> -->
 
-<<<<<<< HEAD
-        <fm-input label="手机号码" />
-=======
         <fm-input label="手机号码" v-model="phoneNumber"/><br>
         <div>{{ phoneNumber }}</div>
->>>>>>> ebdbd1be82aa316804d02208f86595d3fe546f63
         <label for="verifycode">短信动态验证码</label>
         <input type="text" name='verifycode'>
         <button>获取短信验证码</button>
