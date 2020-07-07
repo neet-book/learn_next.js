@@ -45,6 +45,7 @@ export default class MovieList extends Vue {
   currentPage: number = 0
   maxPage: number = 0
   distance: number = 0
+
   @Inject('movieList') movieList: any[] | undefined
   
   mounted() {

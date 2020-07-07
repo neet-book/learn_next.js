@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <header>
-      <img src="/image/logo.png" alt="logo">
+      <!-- <div class="logo"></div> -->
+      <!-- <img src="/image/logo.png" alt="logo"> -->
       <span >已有账号?</span>
       <button>登录</button>
     </header>
@@ -10,7 +11,7 @@
         <!-- <label for="phone">手机号</label>
         <input type="text" name="phone"> -->
 
-        <fm-input label="手机号码" v-model="phoneNumber"/><br>
+        <fm-input label="手机号码" :rule="rule"/><br>
         <div>{{ phoneNumber }}</div>
         <label for="verifycode">短信动态验证码</label>
         <input type="text" name='verifycode'>
@@ -37,9 +38,16 @@ import { Vue, Component } from 'nuxt-property-decorator'
 })
 export default class Register extends Vue {
   phoneNumber: number | string = ''
+  rule = {required: true, type: 'phone', max: 11, msg: '请输入正确的号码'}
 }
 </script>
 
 <style scoped>
-
+.logo {
+  background-image: url("/image/logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 128px;
+  height: 36px;
+}
 </style>
