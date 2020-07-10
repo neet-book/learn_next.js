@@ -216,6 +216,7 @@ export default class FmInput extends Vue {
 }
 
 .input-box {
+  width: 248px;
   border: solid 1px #69696960;
   outline: none;
   padding: 4px 2px;
@@ -241,7 +242,6 @@ export default class FmInput extends Vue {
 
 .success-tip-icon {
   color: #8bd245;
-  
 }
 .error-tip-icon {
   color: #f76120;

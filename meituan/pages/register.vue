@@ -12,7 +12,7 @@
         <input type="text" name="phone"> -->
        
         <fm-input label="手机号码" :rule="rule" name="phone" /><br>
-        
+        <fm-level-bar />
         <div>{{ phoneNumber }}</div>
         <label for="verifycode">短信动态验证码</label>
         <input type="text" name='verifycode'>
@@ -35,11 +35,13 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 import FmForm from '~/components/common/form-items/fm-form.vue'
 import FmInput from '~/components/common/form-items/fm-input.vue'
+import FmLevelBar from '~/components/common/form-items/fm-level-bar.vue'
 @Component({
   layout: 'blank',
   components: {
     FmForm,
-    FmInput
+    FmInput,
+    FmLevelBar
   }
 })
 export default class Register extends Vue {
