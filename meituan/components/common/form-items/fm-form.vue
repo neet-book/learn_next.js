@@ -1,20 +1,25 @@
 <template>
     <form>
-
+        <slot></slot>
     </form>
 </template>
 
-<script leng="ts">
-import { Vue, Componnt, Inject } from 'nuxt-property-decorator'
-@Componnt({
-    provide() {
-        return {
-            $fm_form: this
-        }
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
+@Component({
+  provide() {
+    return {
+      $fm_form: this
     }
+  }
 })
 export default class FmForm extends Vue {
-    formItems = {}
+  // validator(): boolean {
+  //   for (item in this.formItems) {
+
+  //   }
+  // }
+  formItems = {}
 }
 </script>
 

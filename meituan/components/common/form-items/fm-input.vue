@@ -1,25 +1,32 @@
 <template>
   <div class="fm-input">
-    <div>
       <input
+        :class="{ err: visible && !result }"
+        v-model='value'
+        @blur="onBlur"
+        @focus="onFocus"
+        class="input-box"
         v-if="!label"
         type="text"
-        v-module='value'
-        @input="onInput"
       >
-      <label v-else>{{ label }}<input
-        type="text"
-        v-module='value'
-        @input="onInput"
-      ></label>
-    </div>
-    <span class="tip" v-show="visibale">{{ msg }}</span>
+      <label v-else class="input-label">
+        {{ label }}
+        <input
+          :class="{ err: visible && !result }"
+          v-model="value"
+          @blur="onBlur"
+          @focus="onFocus"
+          class="input-box"
+          type="text"
+        >
+      </label>
+      <span v-show="visible && result" class="success-tip"><i class="el-icon-success success-tip-icon"></i></span>
+      <span v-show="visible && !result" class="error-tip"><i class="el-icon-error error-tip-icon"></i> {{ msg }}</span>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop, Inject } from 'nuxt-property-decorator'
-import FmForm from './fm-form.vue'
 
 export interface Rule {
   required?: boolean
@@ -96,28 +103,47 @@ class CheckType {
 export default class FmInput extends Vue {
   @Prop(String) label: string | undefined
   // @Prop(String) value: string | undefined
-  value=''
   @Prop({ type: Object, default: () => {} }) rule: Rule | undefined
+  @Prop(String) name: string | undefined
+  value=''
   // 验证失败提示内容
   msg: string = ''
   // 是否显示验证失败提示信息
-  visibale: boolean = false
-  // @Inject('$fm_form') $fm_from: any
+  visible: boolean = false
+  // 验证结果
+  result: boolean = true
 
-  // 声明周期钩子
+  @Inject('$fm_form') $fm_from: any
+
+  // 生命周期钩子
   mounted() {
-    // this.$fm_from
+    // 在父级form组件中注册表单组件
+    if (this.$fm_from) {
+      console.log(typeof this.$fm_from)
+      // 必填项，result初始化为false
+      if (this.$props.rule.required) this.result = false
+      this.$fm_from.formItems[this.name as string] = {
+        result: this.result,
+        value: this.value,
+        rule: '',
+        inst: this
+      }
+    }
     this.msg = this.$props.rule.msg || '输入的内容有误'
   }
 
   // Methods
-  onInput(event: any) {
+  onBlur(event: any) {
+    this.visible = true
     const value = event.target.value
     // // 验证规则
-    // this.showTip()
-    let {result, rule} = this.valiFromdate(value)
-    // console.log(result, rule)
-    this.visibale = !result
+    let {result} = this.valiFromdate(value)
+    console.log(result)
+    this.result = result
+  }
+
+  onFocus() {
+    this.visible = false
   }
 
   // 根据规则验证表达内容
@@ -149,7 +175,6 @@ export default class FmInput extends Vue {
         return value.toString().length >= content
       },
       type(content:any, value: any): boolean {
-        console.log(content)
         return checkType.check[content](value)
       }
     }
@@ -178,12 +203,47 @@ export default class FmInput extends Vue {
   }
 
   showTip(): void {
-    this.visibale = true
+    this.visible = true
+    this.result = false
   }
   
 }
 </script>
 
 <style scoped>
+.input-label {
+  font-size: 14px;
+}
 
+.input-box {
+  border: solid 1px #69696960;
+  outline: none;
+  padding: 4px 2px;
+}
+
+.input-box:focus {
+  border: 1px solid #FFC300;
+}
+
+.err {
+  border: 1px solid #f76120;
+}
+
+.success-tip, .error-tip {
+  color: var(--color-normal);
+  font-size: 12px;
+}
+
+.success-tip-icon, .error-tip-icon {
+  font-size: 16px;
+  margin: 0 2px;
+}
+
+.success-tip-icon {
+  color: #8bd245;
+  
+}
+.error-tip-icon {
+  color: #f76120;
+}
 </style>

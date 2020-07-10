@@ -7,11 +7,12 @@
       <button>登录</button>
     </header>
     <main>
-      <form>
+      <fm-form>
         <!-- <label for="phone">手机号</label>
         <input type="text" name="phone"> -->
-
-        <fm-input label="手机号码" :rule="rule"/><br>
+       
+        <fm-input label="手机号码" :rule="rule" name="phone" /><br>
+        
         <div>{{ phoneNumber }}</div>
         <label for="verifycode">短信动态验证码</label>
         <input type="text" name='verifycode'>
@@ -24,7 +25,7 @@
         <input type="password" name="password2">
 
         <button>同意以下协议并注册</button>
-      </form>
+      </fm-form>>
       <a href="#" class="protocol">用户服务协议</a><a href="#" class="protocol">用户隐私协议</a>
     </main>
   </div>
@@ -32,9 +33,14 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-
+import FmForm from '~/components/common/form-items/fm-form.vue'
+import FmInput from '~/components/common/form-items/fm-input.vue'
 @Component({
-  layout: 'blank'
+  layout: 'blank',
+  components: {
+    FmForm,
+    FmInput
+  }
 })
 export default class Register extends Vue {
   phoneNumber: number | string = ''
