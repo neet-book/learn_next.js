@@ -1,32 +1,28 @@
 <template>
   <div class="container">
     <header>
-      <!-- <div class="logo"></div> -->
-      <!-- <img src="/image/logo.png" alt="logo"> -->
-      <span >已有账号?</span>
-      <button>登录</button>
+      <div class="header-container clear-fix">
+        <div class="logo"></div>
+        <div class="load-container">
+          <span>已有账号?</span><button class="btn load-btn">登录</button>
+        </div>
+      </div>
     </header>
     <main>
-      <fm-form>
-        <!-- <label for="phone">手机号</label>
-        <input type="text" name="phone"> -->
-       
-        <fm-input label="手机号码" :rule="rule" name="phone" /><br>
-        <fm-level-bar />
-        <div>{{ phoneNumber }}</div>
-        <label for="verifycode">短信动态验证码</label>
-        <input type="text" name='verifycode'>
-        <button>获取短信验证码</button>
-
-        <label for="password">创建密码</label>
-        <input type="password" name="password">
-
-        <label for="password2">确认密码</label>
-        <input type="password" name="password2">
-
-        <button>同意以下协议并注册</button>
-      </fm-form>>
-      <a href="#" class="protocol">用户服务协议</a><a href="#" class="protocol">用户隐私协议</a>
+      <div class="form-container">
+        <fm-form>
+          <fm-input  class="item" label="手机号码" :rule="phoneRule" name="phone" />
+          <button class="code-btn">获取短信验证码</button>
+          <fm-input  class="item" label="短信动态码" v-model="pw" :rule="pwRule" name="code" />
+          <fm-input  class="item" label="创建密码" v-model="pw" :rule="pwRule" name="password" />
+          <fm-level-bar class="level-bar" :pw="pw" />
+          <fm-input class="item" label="确认密码" v-model="pwCheck" :rule="pwRule" name="password-check" />
+          <button class="btn agree-btn">同意以下协议并注册</button>
+          <div class="protocol-box">
+            <a href="#" class="protocol">用户服务协议</a><a href="#" class="protocol">用户隐私协议</a>
+          </div>
+        </fm-form>
+      </div>
     </main>
   </div>
 </template>
@@ -46,16 +42,101 @@ import FmLevelBar from '~/components/common/form-items/fm-level-bar.vue'
 })
 export default class Register extends Vue {
   phoneNumber: number | string = ''
-  rule = {required: true, type: 'phone', max: 11, msg: '请输入正确的号码'}
+  phoneRule = {required: true, type: 'phone', max: 11, msg: '请输入正确的号码'}
+  pwRule = {required: true, type: 'password', max: 18, msg: '请输入格式正确的密码'}
+  pw = ''
+  pwCheck = ''
 }
 </script>
 
 <style scoped>
+.header-container, .form-container {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+header {
+  border-bottom: 1px solid #696969;
+}
+
+.header-container {
+  height: 40px;
+  padding: 10px 0;
+}
+
 .logo {
+  display: inline-block;
   background-image: url("/image/logo.png");
   background-repeat: no-repeat;
   background-size: contain;
   width: 128px;
   height: 36px;
+}
+
+.load-container {
+  float: right;
+}
+
+.item {
+  margin: 10px 0;
+}
+
+.btn {
+  border: none;
+  border-radius: 2px;
+  padding: 7px 20px;
+  outline: none;
+  background-image: linear-gradient(135deg,#FFD000 0,#FFBD00 100%);
+  box-shadow: 0 2px 1px rgba(191,105,0,.15);
+}
+
+.load-btn {
+  font-size: 12px;
+  padding: 5px;
+  color: #666;
+}
+
+.agree-btn {
+  color: #222;
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 110px;
+}
+
+.code-btn {
+  outline: none;
+  font-size: 12px;
+  border: solid 1px #b4aaaa35;
+  border-radius: 2px;
+  margin-left: 110px;
+  padding: 3px 10px;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0, rgb(210, 210, 210) 100%);
+}
+
+.protocol-box {
+  margin-top: 10px;
+  padding-left: 110px;
+}
+
+.protocol {
+  color: #FE8C00;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.protocol::before {
+  content: '《';
+  color: #FE8C00;
+  font-size: 13px;
+}
+
+.protocol::after {
+  content: '》';
+  color: #FE8C00;
+  font-size: 13px;
+}
+
+.level-bar {
+  margin:5px 0 5px 110px;
 }
 </style>

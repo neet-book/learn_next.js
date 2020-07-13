@@ -2,24 +2,24 @@
   <div class="fm-input">
       <input
         :class="{ err: visible && !result }"
-        v-model='value'
+        v-model='boxValue'
         @blur="onBlur"
         @focus="onFocus"
+        @input="onInput"
         class="input-box"
         v-if="!label"
         type="text"
       >
-      <label v-else class="input-label">
-        {{ label }}
+      <label v-else class="input-label">{{ label }}</label>
         <input
           :class="{ err: visible && !result }"
-          v-model="value"
+          v-model="boxValue"
           @blur="onBlur"
           @focus="onFocus"
+          @input="onInput"
           class="input-box"
           type="text"
         >
-      </label>
       <span v-show="visible && result" class="success-tip"><i class="el-icon-success success-tip-icon"></i></span>
       <span v-show="visible && !result" class="error-tip"><i class="el-icon-error error-tip-icon"></i> {{ msg }}</span>
   </div>
@@ -105,21 +105,20 @@ export default class FmInput extends Vue {
   // @Prop(String) value: string | undefined
   @Prop({ type: Object, default: () => {} }) rule: Rule | undefined
   @Prop(String) name: string | undefined
-  value=''
+  @Prop() value: any
   // 验证失败提示内容
   msg: string = ''
   // 是否显示验证失败提示信息
   visible: boolean = false
   // 验证结果
   result: boolean = true
-
+  boxValue = ''
   @Inject('$fm_form') $fm_from: any
 
   // 生命周期钩子
   mounted() {
     // 在父级form组件中注册表单组件
     if (this.$fm_from) {
-      console.log(typeof this.$fm_from)
       // 必填项，result初始化为false
       if (this.$props.rule.required) this.result = false
       this.$fm_from.formItems[this.name as string] = {
@@ -133,17 +132,20 @@ export default class FmInput extends Vue {
   }
 
   // Methods
-  onBlur(event: any) {
+  onBlur(event: any): void {
     this.visible = true
     const value = event.target.value
-    // // 验证规则
+    // 验证规则
     let {result} = this.valiFromdate(value)
-    console.log(result)
     this.result = result
   }
 
-  onFocus() {
+  onFocus(ev: any): void {
     this.visible = false
+  }
+
+  onInput(ev: any): void {
+    this.$emit('input', ev.target.value)
   }
 
   // 根据规则验证表达内容
@@ -211,15 +213,28 @@ export default class FmInput extends Vue {
 </script>
 
 <style scoped>
+.fm-input {
+  font-size: 0;
+}
 .input-label {
+  display: inline-block;
+  padding-right: 10px;
+  width: 100px;
+  height: 36px;
+  line-height: 36px;
   font-size: 14px;
+  text-align: right;
+  color: #333;
 }
 
 .input-box {
+  font-size: 14px;
+  vertical-align: top;
   width: 248px;
+  height: 24px;
   border: solid 1px #69696960;
   outline: none;
-  padding: 4px 2px;
+  padding: 5px;
 }
 
 .input-box:focus {
