@@ -6,6 +6,18 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
+
+export interface FormItem {
+  result: boolean
+  value: any
+  rule: string
+  inst: Vue
+}
+
+export interface FormItems {
+  [name: string]: FormItem
+}
+
 @Component({
   provide() {
     return {
@@ -14,12 +26,19 @@ import { Vue, Component } from 'nuxt-property-decorator'
   }
 })
 export default class FmForm extends Vue {
-  // validator(): boolean {
-  //   for (item in this.formItems) {
+  formItems: FormItems = {}
+  
+  validater (): FormItem[] {
+    const failedItems: FormItem[] = [] 
+    for (const [key, item] of Object.entries(this.formItems)) {
+      if (!item.result) {
+        failedItems.push(item)
+      }
+    }
 
-  //   }
-  // }
-  formItems = {}
+    return failedItems
+  }
+  
 }
 </script>
 
