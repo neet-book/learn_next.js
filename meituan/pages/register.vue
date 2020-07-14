@@ -64,6 +64,10 @@ header {
   padding: 10px 0;
 }
 
+.form-container {
+  margin-top: 35px;
+}
+
 .logo {
   display: inline-block;
   background-image: url("/image/logo.png");
@@ -74,7 +78,15 @@ header {
 }
 
 .load-container {
+  padding: 0 10px;
+  line-height: 36px;
   float: right;
+}
+
+.load-container span {
+  color: var(--color-tint);
+  font-size: 13px;
+  padding-right: 10px;
 }
 
 .item {
@@ -115,7 +127,7 @@ header {
 
 .protocol-box {
   margin-top: 10px;
-  padding-left: 110px;
+  margin-left: 110px;
 }
 
 .protocol {
@@ -138,5 +150,19 @@ header {
 
 .level-bar {
   margin:5px 0 5px 110px;
+}
+
+
+@media screen and (max-width: 580px) {
+  .form-container {
+    padding: 0 50px;
+    width: 300px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .code-btn, .level-bar, .protocol-box, .agree-btn {
+    margin-left: 0;
+  }
 }
 </style>

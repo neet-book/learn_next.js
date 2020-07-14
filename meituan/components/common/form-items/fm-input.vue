@@ -246,6 +246,7 @@ export default class FmInput extends Vue {
 }
 
 .success-tip, .error-tip {
+  padding: 5px 0;
   color: var(--color-normal);
   font-size: 12px;
 }
@@ -260,5 +261,15 @@ export default class FmInput extends Vue {
 }
 .error-tip-icon {
   color: #f76120;
+}
+
+@media screen and (max-width: 580px) {
+  .input-label {
+    text-align: left;
+  }
+
+  .success-tip, .error-tip {
+    display: block;
+  }
 }
 </style>
