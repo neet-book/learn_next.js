@@ -1,7 +1,7 @@
 const router = require('./index.js')
 
 async function getRecommend() {
-  const db = await require('../db/index.js')
+  const db = await require('../dbs/index-backup.js')
   return await db.coll('recommend').find()
 }
 

@@ -18,7 +18,7 @@
           @focus="onFocus"
           @input="onInput"
           class="input-box"
-          type="text"
+          :type="type"
         >
       <span v-show="visible && result" class="success-tip"><i class="el-icon-success success-tip-icon"></i></span>
       <span v-show="visible && !result" class="error-tip"><i class="el-icon-error error-tip-icon"></i> {{ msg }}</span>
@@ -106,6 +106,7 @@ export default class FmInput extends Vue {
   @Prop({ type: Object, default: () => {} }) rule: Rule | undefined
   @Prop(String) name: string | undefined
   @Prop() value: any
+  @Prop({ type: String, default: 'text' }) type: string | undefined
   // 验证失败提示内容
   msg: string = ''
   // 是否显示验证失败提示信息

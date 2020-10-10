@@ -1,9 +1,8 @@
 <template>
   <div class="minshu">
+    <!-- 城市列表 -->
     <box-header class="header">
-      <template v-slot:maintitle>
         城市
-      </template>
       <template v-slot:subtitle>
         <div class="cities">
           <!-- 所有城市 -->
@@ -22,7 +21,7 @@
         全部<i class="el-icon-arrow-right"></i>
       </template>
     </box-header>
-    <!-- 民宿 -->
+    <!-- 民宿卡片 -->
     <div class="minsu-content">
       <minsu-card
         v-for="ms of minsu[current]"
@@ -56,9 +55,12 @@ interface MinsuList {
   },
   async mounted() {
     const cityId = this.$props?.cities[0]?.cityId || 0
-    this.$data.minsu[cityId] = await this.$net.getMinsu(cityId)
+    try {
+      this.$data.minsu[cityId] = await this.$net.getMinsu(cityId)
+    } catch (e) {
+      this.$data.minsu[cityId] = []
+    }
     this.$data.current = cityId
-    console.log(this.$data.minsu, cityId)
   }
 })
 export default class Minsu extends Vue {
@@ -66,7 +68,6 @@ export default class Minsu extends Vue {
   cities: City[] | undefined
 
   current: number = 0
-
   minsu: MinsuList = {}
 
   async changeCity(cityId:number): Promise<void> {

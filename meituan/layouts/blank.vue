@@ -15,5 +15,6 @@ export default class Blank extends Vue {
 <style scoped>
 .container {
   background-color: white;
+  height: 100%;
 }
 </style>

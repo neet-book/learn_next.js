@@ -1,7 +1,7 @@
 const router = require('./index.js')
 
 async function getDate(coll) {
-  const db = await require('../db/index.js')
+  const db = await require('../dbs/index-backup.js')
   return await db.coll(coll).find()
 }
 

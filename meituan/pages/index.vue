@@ -18,7 +18,7 @@
     <!-- 推荐区域 -->
     <recommend class="recommend" />
     <!-- 底部导航 -->
-    <botton-nav :nav-list="navList" />
+    <botton-nav :nav-list="navList" /> -->
   </div>
 </template>
 
@@ -103,7 +103,7 @@ export default class Index extends Vue {
         navList
       }
     } catch(e) {
-
+      console.log(e)
     }
   }
 }

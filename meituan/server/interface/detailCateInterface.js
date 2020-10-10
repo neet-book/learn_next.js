@@ -1,5 +1,5 @@
 async function getDetail() {
-  const datebase = await require('../db/index.js')
+  const datebase = await require('../dbs/index-backup.js')
   //获取数据库数据
   datebase.coll('detail')
   const detailArr = await datebase.find()

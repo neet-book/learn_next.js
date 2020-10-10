@@ -33,6 +33,8 @@ export default class DefaultLayout extends Vue {
   margin: 0 auto;
 }
 
+
+
 @media screen and (max-width: 1190px){
   #main-container {
     width: 950px;

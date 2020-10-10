@@ -13,10 +13,10 @@
         <fm-form>
           <fm-input  class="item" label="手机号码" :rule="phoneRule" name="phone" />
           <button class="code-btn">获取短信验证码</button>
-          <fm-input  class="item" label="短信动态码" v-model="pw" :rule="pwRule" name="code" />
-          <fm-input  class="item" label="创建密码" v-model="pw" :rule="pwRule" name="password" />
+          <fm-input  class="item" label="短信动态码" :rule="pwRule" name="code" />
+          <fm-input  class="item" label="创建密码" v-model="pw" :rule="pwRule" type="password" name="password" />
           <fm-level-bar class="level-bar" :pw="pw" />
-          <fm-input class="item" label="确认密码" v-model="pwCheck" :rule="pwRule" name="password-check" />
+          <fm-input class="item" label="确认密码" v-model="pwCheck" :rule="pwRule" type="password" name="password-check" />
           <button class="btn agree-btn">同意以下协议并注册</button>
           <div class="protocol-box">
             <a href="#" class="protocol">用户服务协议</a><a href="#" class="protocol">用户隐私协议</a>
