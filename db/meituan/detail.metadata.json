@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"meituan.detail"}],"uuid":"59d4baee1c404692ac118046fee78b85"}
