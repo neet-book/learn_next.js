@@ -1,6 +1,7 @@
-const { Schema } = require('mongoose')
+const mongoose = require('mongoose')
 const crypot = require('crypto')
-
+const { Schema } = mongoose
+// 用户文档schema
 const userSchema = new Schema({
     username: {
         type: String,

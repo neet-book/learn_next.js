@@ -1,4 +1,6 @@
-const { Schema } = require('mongoose')
+const { mongoose } = require('mongoose')
+const { Schema } = mongoose
+
 // 民宿子文档Schema
 const MinsuSubSchema = new Schema({
     productId: { type: String },
